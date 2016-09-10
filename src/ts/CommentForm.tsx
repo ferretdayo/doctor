@@ -1,5 +1,6 @@
 import * as React from "react";
-import {CommentData} from "./Comment"
+
+import {CommentData} from "./CommentData";
 
 interface CommentFormProps { 
     onCommentSubmit: (data: CommentData) => any;

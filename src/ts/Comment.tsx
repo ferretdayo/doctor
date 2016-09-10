@@ -2,12 +2,6 @@ import * as React from "react";
 //import Remarkable from 'remarkable';
 var Remarkable = require('remarkable');
 
-export interface CommentData{
-    author: string;
-    text: string;
-    id?: number;
-}
-
 interface CommentProps { 
     author: string;
     key: number;

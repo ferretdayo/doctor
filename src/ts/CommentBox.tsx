@@ -1,8 +1,8 @@
 import * as React from "react";
 
+import {CommentData} from "./CommentData"
 import {CommentForm} from "./CommentForm"
 import {CommentList} from "./CommentList"
-import {CommentData} from "./Comment"
 
 interface CommentBoxProps{
     url: string;

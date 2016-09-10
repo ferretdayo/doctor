@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import {Comment, CommentData} from "./Comment";
+import {CommentData} from "./CommentData";
+import {Comment} from "./Comment";
 
 interface CommentListProps{
     data: CommentData[];
