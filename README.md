@@ -2,7 +2,16 @@
 
 # React Tutorial
 
-This is the React comment box example from [the React tutorial](http://facebook.github.io/react/docs/tutorial.html).
+[the React tutorial](http://facebook.github.io/react/docs/tutorial.html)をReact+TypeScript+Webpackで書き直した。
+
+# Usage
+
+以下のコマンドでファイルの監視を行う。
+変更されればTypeScriptをコンパイルしてファイル出力
+```sh
+npm i
+gulp
+```
 
 ## To use
 
