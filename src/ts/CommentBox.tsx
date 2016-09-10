@@ -9,7 +9,7 @@ interface CommentBoxProps{
     pollInterval: number;
 }
 
-interface CommentBoxState{
+export interface CommentBoxState{
     data: CommentData[];
 }
 
