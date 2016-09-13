@@ -10,9 +10,13 @@
     "files": [
         "./typings/index.d.ts",
         "./src/ts/index.tsx",
-        "./src/ts/Comment.tsx",
-        "./src/ts/CommentList.tsx",
-        "./src/ts/CommentBox.tsx",
-        "./src/ts/CommentForm.tsx"
+        "./src/ts/Card.tsx",
+        "./src/ts/CardButton.tsx",
+        "./src/ts/CardDetails.tsx",
+        "./src/ts/CardList.tsx",
+        "./src/ts/CardUi.tsx",
+        "./src/ts/UserInfoType.tsx",
+        "./src/ts/UserImgType.tsx",
+        "./src/ts/UserDetailsType.tsx"
     ]
 }
