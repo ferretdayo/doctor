@@ -1,15 +1,14 @@
 import * as React from "react";
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import SentimentVerySatisfied from 'material-ui/svg-icons/social/sentiment-very-satisfied';
 import SentimentVeryDissatisfied from 'material-ui/svg-icons/social/sentiment-very-dissatisfied';
 
-interface CardButtonProps { 
-    //onCommentSubmit: (data: CommentData) => any;
+interface CardNopeButtonProps { 
+    onNopeClick: () => any;
 }
 
-export class CardButton extends React.Component<CardButtonProps, {}> {
-    constructor(props: CardButtonProps) {
+export class CardNopeButton extends React.Component<CardNopeButtonProps, {}> {
+    constructor(props: CardNopeButtonProps) {
         super(props);
         //関数のバインド
         //this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,14 +35,11 @@ export class CardButton extends React.Component<CardButtonProps, {}> {
     }
     render(){
         return(
-            <form className="CardButton" onSubmit={this.handleSubmit}> 
+            <span className="CardNopeButton" onSubmit={this.handleSubmit}> 
                 <FloatingActionButton secondary={true} onClick={this.onClickNope} style={{marginRight:'10px'}}>
                     <SentimentVeryDissatisfied />
                 </FloatingActionButton>
-                <FloatingActionButton onClick={this.onClickYep} style={{marginLeft:'10px'}}>
-                    <SentimentVerySatisfied />
-                </FloatingActionButton>
-            </form>
+            </span>
         );
     }
 }

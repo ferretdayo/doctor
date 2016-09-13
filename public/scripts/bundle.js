@@ -9566,8 +9566,10 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var React = __webpack_require__(1);
-	var CardButton_1 = __webpack_require__(188);
-	var CardList_1 = __webpack_require__(256);
+	var data_1 = __webpack_require__(274);
+	var CardNopeButton_1 = __webpack_require__(188);
+	var CardLikeButton_1 = __webpack_require__(255);
+	var CardList_1 = __webpack_require__(257);
 	var Card = (function (_super) {
 	    __extends(Card, _super);
 	    function Card(props) {
@@ -9578,98 +9580,7 @@
 	        //this.handleSubmit = this.handleSubmit.bind(this);
 	    }
 	    Card.prototype.loadUserInfo = function () {
-	        this.setState({ data: [{
-	                    "id": 1,
-	                    "nickname": "ねこ",
-	                    "age": 23,
-	                    "live": "東京",
-	                    "comment": "ねこ大好きです",
-	                    "work": "猫カフェ経営",
-	                    "height": 169.0,
-	                    "img": "./img/1.jpg"
-	                }, {
-	                    "id": 2,
-	                    "nickname": "いぬ",
-	                    "age": 20,
-	                    "live": "神奈川",
-	                    "comment": "いぬ大好きです",
-	                    "work": "在宅ワーク",
-	                    "height": 159.0,
-	                    "img": "./img/2.jpg"
-	                }, {
-	                    "id": 3,
-	                    "nickname": "とり",
-	                    "age": 28,
-	                    "live": "京都",
-	                    "comment": "鳥肉大好きです",
-	                    "work": "野鳥の撮影",
-	                    "height": 160.0,
-	                    "img": "./img/3.jpg"
-	                }, {
-	                    "id": 4,
-	                    "nickname": "A",
-	                    "age": 30,
-	                    "live": "熊本",
-	                    "comment": "おはよう",
-	                    "work": "エンジニア",
-	                    "height": 145.0,
-	                    "img": "./img/4.jpg"
-	                }, {
-	                    "id": 5,
-	                    "nickname": "B",
-	                    "age": 31,
-	                    "live": "北海道",
-	                    "comment": "寒い",
-	                    "work": "除雪車の運転",
-	                    "height": 150.0,
-	                    "img": "./img/5.jpg"
-	                }, {
-	                    "id": 6,
-	                    "nickname": "C",
-	                    "age": 32,
-	                    "live": "青森",
-	                    "comment": "リンゴおいしい",
-	                    "work": "リンゴ園",
-	                    "height": 185.0,
-	                    "img": "./img/6.jpg"
-	                }, {
-	                    "id": 7,
-	                    "nickname": "D",
-	                    "age": 33,
-	                    "live": "秋田",
-	                    "comment": "秋田県飽きた",
-	                    "work": "農業",
-	                    "height": 167.0,
-	                    "img": "./img/7.jpg"
-	                }, {
-	                    "id": 8,
-	                    "nickname": "E",
-	                    "age": 34,
-	                    "live": "和歌山",
-	                    "comment": "白浜きれいだった",
-	                    "work": "水泳コーチ",
-	                    "height": 166.0,
-	                    "img": "./img/8.jpg"
-	                }, {
-	                    "id": 9,
-	                    "nickname": "F",
-	                    "age": 35,
-	                    "live": "広島",
-	                    "comment": "お好み焼き食べたい",
-	                    "work": "お好み焼き屋",
-	                    "height": 175.0,
-	                    "img": "./img/9.jpg"
-	                }, {
-	                    "id": 10,
-	                    "nickname": "G",
-	                    "age": 36,
-	                    "live": "山口",
-	                    "comment": "角島よかった～",
-	                    "work": "漁師",
-	                    "height": 162.0,
-	                    "img": "./img/10.jpg"
-	                }]
-	        });
+	        this.setState({ data: [data_1.UserData[0], data_1.UserData[1]] });
 	        // $.ajax({
 	        //     url: this.props.url,
 	        //     dataType: 'json',
@@ -9685,11 +9596,15 @@
 	        //     }.bind(this)                                             
 	        // });  
 	    };
+	    Card.prototype.onNope = function () {
+	    };
+	    Card.prototype.onLike = function () {
+	    };
 	    Card.prototype.componentDidMount = function () {
 	        this.loadUserInfo();
 	    };
 	    Card.prototype.render = function () {
-	        return (React.createElement("div", {className: "Card"}, React.createElement(CardList_1.CardList, {CardData: this.state.data}), React.createElement(CardButton_1.CardButton, null)));
+	        return (React.createElement("div", {className: "Card"}, React.createElement(CardList_1.CardList, {CardData: this.state.data}), React.createElement("div", null, React.createElement(CardNopeButton_1.CardNopeButton, {onNopeClick: this.onNope}), React.createElement(CardLikeButton_1.CardLikeButton, {onLikeClick: this.onLike}))));
 	    };
 	    return Card;
 	}(React.Component));
@@ -9709,40 +9624,39 @@
 	};
 	var React = __webpack_require__(1);
 	var FloatingActionButton_1 = __webpack_require__(189);
-	var sentiment_very_satisfied_1 = __webpack_require__(243);
-	var sentiment_very_dissatisfied_1 = __webpack_require__(255);
-	var CardButton = (function (_super) {
-	    __extends(CardButton, _super);
-	    function CardButton(props) {
+	var sentiment_very_dissatisfied_1 = __webpack_require__(243);
+	var CardNopeButton = (function (_super) {
+	    __extends(CardNopeButton, _super);
+	    function CardNopeButton(props) {
 	        _super.call(this, props);
 	        //関数のバインド
 	        //this.handleSubmit = this.handleSubmit.bind(this);
 	    }
-	    CardButton.prototype.componentWillEnter = function (callback) {
+	    CardNopeButton.prototype.componentWillEnter = function (callback) {
 	        console.log("component will enter");
 	        callback();
 	    };
-	    CardButton.prototype.componentDidEnter = function () {
+	    CardNopeButton.prototype.componentDidEnter = function () {
 	        console.log("component will Enter");
 	    };
-	    CardButton.prototype.componentWillLeave = function (callback) {
+	    CardNopeButton.prototype.componentWillLeave = function (callback) {
 	        console.log("component will leave");
 	        callback();
 	    };
 	    //onSubmitで呼び出される関数
-	    CardButton.prototype.handleSubmit = function (e) {
+	    CardNopeButton.prototype.handleSubmit = function (e) {
 	        e.preventDefault();
 	    };
-	    CardButton.prototype.onClickNope = function () {
+	    CardNopeButton.prototype.onClickNope = function () {
 	    };
-	    CardButton.prototype.onClickYep = function () {
+	    CardNopeButton.prototype.onClickYep = function () {
 	    };
-	    CardButton.prototype.render = function () {
-	        return (React.createElement("form", {className: "CardButton", onSubmit: this.handleSubmit}, React.createElement(FloatingActionButton_1.default, {secondary: true, onClick: this.onClickNope, style: { marginRight: '10px' }}, React.createElement(sentiment_very_dissatisfied_1.default, null)), React.createElement(FloatingActionButton_1.default, {onClick: this.onClickYep, style: { marginLeft: '10px' }}, React.createElement(sentiment_very_satisfied_1.default, null))));
+	    CardNopeButton.prototype.render = function () {
+	        return (React.createElement("span", {className: "CardNopeButton", onSubmit: this.handleSubmit}, React.createElement(FloatingActionButton_1.default, {secondary: true, onClick: this.onClickNope, style: { marginRight: '10px' }}, React.createElement(sentiment_very_dissatisfied_1.default, null))));
 	    };
-	    return CardButton;
+	    return CardNopeButton;
 	}(React.Component));
-	exports.CardButton = CardButton;
+	exports.CardNopeButton = CardNopeButton;
 
 
 /***/ },
@@ -16412,18 +16326,18 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var SocialSentimentVerySatisfied = function SocialSentimentVerySatisfied(props) {
+	var SocialSentimentVeryDissatisfied = function SocialSentimentVeryDissatisfied(props) {
 	  return _react2.default.createElement(
 	    _SvgIcon2.default,
 	    props,
-	    _react2.default.createElement('path', { d: 'M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm1-10.06L14.06 11l1.06-1.06L16.18 11l1.06-1.06-2.12-2.12zm-4.12 0L9.94 11 11 9.94 8.88 7.82 6.76 9.94 7.82 11zM12 17.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z' })
+	    _react2.default.createElement('path', { d: 'M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm4.18-12.24l-1.06 1.06-1.06-1.06L13 8.82l1.06 1.06L13 10.94 14.06 12l1.06-1.06L16.18 12l1.06-1.06-1.06-1.06 1.06-1.06zM7.82 12l1.06-1.06L9.94 12 11 10.94 9.94 9.88 11 8.82 9.94 7.76 8.88 8.82 7.82 7.76 6.76 8.82l1.06 1.06-1.06 1.06zM12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z' })
 	  );
 	};
-	SocialSentimentVerySatisfied = (0, _pure2.default)(SocialSentimentVerySatisfied);
-	SocialSentimentVerySatisfied.displayName = 'SocialSentimentVerySatisfied';
-	SocialSentimentVerySatisfied.muiName = 'SvgIcon';
+	SocialSentimentVeryDissatisfied = (0, _pure2.default)(SocialSentimentVeryDissatisfied);
+	SocialSentimentVeryDissatisfied.displayName = 'SocialSentimentVeryDissatisfied';
+	SocialSentimentVeryDissatisfied.muiName = 'SvgIcon';
 	
-	exports.default = SocialSentimentVerySatisfied;
+	exports.default = SocialSentimentVeryDissatisfied;
 
 /***/ },
 /* 244 */
@@ -16880,6 +16794,53 @@
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var React = __webpack_require__(1);
+	var FloatingActionButton_1 = __webpack_require__(189);
+	var sentiment_very_satisfied_1 = __webpack_require__(256);
+	var CardLikeButton = (function (_super) {
+	    __extends(CardLikeButton, _super);
+	    function CardLikeButton(props) {
+	        _super.call(this, props);
+	        //関数のバインド
+	        //this.handleSubmit = this.handleSubmit.bind(this);
+	    }
+	    CardLikeButton.prototype.componentWillEnter = function (callback) {
+	        console.log("component will enter");
+	        callback();
+	    };
+	    CardLikeButton.prototype.componentDidEnter = function () {
+	        console.log("component will Enter");
+	    };
+	    CardLikeButton.prototype.componentWillLeave = function (callback) {
+	        console.log("component will leave");
+	        callback();
+	    };
+	    //onSubmitで呼び出される関数
+	    CardLikeButton.prototype.handleSubmit = function (e) {
+	        e.preventDefault();
+	    };
+	    CardLikeButton.prototype.onClickNope = function () {
+	    };
+	    CardLikeButton.prototype.onClickYep = function () {
+	    };
+	    CardLikeButton.prototype.render = function () {
+	        return (React.createElement("span", {className: "CardLikeButton", onSubmit: this.handleSubmit}, React.createElement(FloatingActionButton_1.default, {onClick: this.onClickYep, style: { marginLeft: '10px' }}, React.createElement(sentiment_very_satisfied_1.default, null))));
+	    };
+	    return CardLikeButton;
+	}(React.Component));
+	exports.CardLikeButton = CardLikeButton;
+
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -16900,21 +16861,21 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var SocialSentimentVeryDissatisfied = function SocialSentimentVeryDissatisfied(props) {
+	var SocialSentimentVerySatisfied = function SocialSentimentVerySatisfied(props) {
 	  return _react2.default.createElement(
 	    _SvgIcon2.default,
 	    props,
-	    _react2.default.createElement('path', { d: 'M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm4.18-12.24l-1.06 1.06-1.06-1.06L13 8.82l1.06 1.06L13 10.94 14.06 12l1.06-1.06L16.18 12l1.06-1.06-1.06-1.06 1.06-1.06zM7.82 12l1.06-1.06L9.94 12 11 10.94 9.94 9.88 11 8.82 9.94 7.76 8.88 8.82 7.82 7.76 6.76 8.82l1.06 1.06-1.06 1.06zM12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z' })
+	    _react2.default.createElement('path', { d: 'M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm1-10.06L14.06 11l1.06-1.06L16.18 11l1.06-1.06-2.12-2.12zm-4.12 0L9.94 11 11 9.94 8.88 7.82 6.76 9.94 7.82 11zM12 17.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z' })
 	  );
 	};
-	SocialSentimentVeryDissatisfied = (0, _pure2.default)(SocialSentimentVeryDissatisfied);
-	SocialSentimentVeryDissatisfied.displayName = 'SocialSentimentVeryDissatisfied';
-	SocialSentimentVeryDissatisfied.muiName = 'SvgIcon';
+	SocialSentimentVerySatisfied = (0, _pure2.default)(SocialSentimentVerySatisfied);
+	SocialSentimentVerySatisfied.displayName = 'SocialSentimentVerySatisfied';
+	SocialSentimentVerySatisfied.muiName = 'SvgIcon';
 	
-	exports.default = SocialSentimentVeryDissatisfied;
+	exports.default = SocialSentimentVerySatisfied;
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16927,7 +16888,7 @@
 	/**
 	 * コンポーネントのimport
 	 */
-	var CardDetails_1 = __webpack_require__(257);
+	var CardDetails_1 = __webpack_require__(258);
 	var CardList = (function (_super) {
 	    __extends(CardList, _super);
 	    function CardList(props) {
@@ -16973,7 +16934,7 @@
 
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16983,7 +16944,7 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var React = __webpack_require__(1);
-	var Card_1 = __webpack_require__(258);
+	var Card_1 = __webpack_require__(259);
 	var CardDetails = (function (_super) {
 	    __extends(CardDetails, _super);
 	    function CardDetails(props) {
@@ -16999,7 +16960,7 @@
 
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17009,31 +16970,31 @@
 	});
 	exports.default = exports.CardExpandable = exports.CardActions = exports.CardText = exports.CardMedia = exports.CardTitle = exports.CardHeader = exports.Card = undefined;
 	
-	var _Card2 = __webpack_require__(259);
+	var _Card2 = __webpack_require__(260);
 	
 	var _Card3 = _interopRequireDefault(_Card2);
 	
-	var _CardHeader2 = __webpack_require__(266);
+	var _CardHeader2 = __webpack_require__(267);
 	
 	var _CardHeader3 = _interopRequireDefault(_CardHeader2);
 	
-	var _CardTitle2 = __webpack_require__(269);
+	var _CardTitle2 = __webpack_require__(270);
 	
 	var _CardTitle3 = _interopRequireDefault(_CardTitle2);
 	
-	var _CardMedia2 = __webpack_require__(270);
+	var _CardMedia2 = __webpack_require__(271);
 	
 	var _CardMedia3 = _interopRequireDefault(_CardMedia2);
 	
-	var _CardText2 = __webpack_require__(271);
+	var _CardText2 = __webpack_require__(272);
 	
 	var _CardText3 = _interopRequireDefault(_CardText2);
 	
-	var _CardActions2 = __webpack_require__(272);
+	var _CardActions2 = __webpack_require__(273);
 	
 	var _CardActions3 = _interopRequireDefault(_CardActions2);
 	
-	var _CardExpandable2 = __webpack_require__(260);
+	var _CardExpandable2 = __webpack_require__(261);
 	
 	var _CardExpandable3 = _interopRequireDefault(_CardExpandable2);
 	
@@ -17049,7 +17010,7 @@
 	exports.default = _Card3.default;
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17074,7 +17035,7 @@
 	
 	var _Paper2 = _interopRequireDefault(_Paper);
 	
-	var _CardExpandable = __webpack_require__(260);
+	var _CardExpandable = __webpack_require__(261);
 	
 	var _CardExpandable2 = _interopRequireDefault(_CardExpandable);
 	
@@ -17248,7 +17209,7 @@
 	exports.default = Card;
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17267,15 +17228,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _keyboardArrowUp = __webpack_require__(261);
+	var _keyboardArrowUp = __webpack_require__(262);
 	
 	var _keyboardArrowUp2 = _interopRequireDefault(_keyboardArrowUp);
 	
-	var _keyboardArrowDown = __webpack_require__(262);
+	var _keyboardArrowDown = __webpack_require__(263);
 	
 	var _keyboardArrowDown2 = _interopRequireDefault(_keyboardArrowDown);
 	
-	var _IconButton = __webpack_require__(263);
+	var _IconButton = __webpack_require__(264);
 	
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 	
@@ -17338,7 +17299,7 @@
 	exports.default = CardExpandable;
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17375,7 +17336,7 @@
 	exports.default = HardwareKeyboardArrowUp;
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17412,7 +17373,7 @@
 	exports.default = HardwareKeyboardArrowDown;
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17422,7 +17383,7 @@
 	});
 	exports.default = undefined;
 	
-	var _IconButton = __webpack_require__(264);
+	var _IconButton = __webpack_require__(265);
 	
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 	
@@ -17431,7 +17392,7 @@
 	exports.default = _IconButton2.default;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17468,7 +17429,7 @@
 	
 	var _FontIcon2 = _interopRequireDefault(_FontIcon);
 	
-	var _Tooltip = __webpack_require__(265);
+	var _Tooltip = __webpack_require__(266);
 	
 	var _Tooltip2 = _interopRequireDefault(_Tooltip);
 	
@@ -17742,7 +17703,7 @@
 	exports.default = IconButton;
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17957,7 +17918,7 @@
 	exports.default = Tooltip;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17978,7 +17939,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Avatar = __webpack_require__(267);
+	var _Avatar = __webpack_require__(268);
 	
 	var _Avatar2 = _interopRequireDefault(_Avatar);
 	
@@ -18159,7 +18120,7 @@
 	exports.default = CardHeader;
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18169,7 +18130,7 @@
 	});
 	exports.default = undefined;
 	
-	var _Avatar = __webpack_require__(268);
+	var _Avatar = __webpack_require__(269);
 	
 	var _Avatar2 = _interopRequireDefault(_Avatar);
 	
@@ -18178,7 +18139,7 @@
 	exports.default = _Avatar2.default;
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18337,7 +18298,7 @@
 	exports.default = Avatar;
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18499,7 +18460,7 @@
 	exports.default = CardTitle;
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18697,7 +18658,7 @@
 	exports.default = CardMedia;
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18807,7 +18768,7 @@
 	exports.default = CardText;
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18919,6 +18880,104 @@
 	  muiTheme: _react.PropTypes.object.isRequired
 	};
 	exports.default = CardActions;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports) {
+
+	"use strict";
+	exports.UserData = [{
+	        "id": 1,
+	        "nickname": "ねこ",
+	        "age": 23,
+	        "live": "東京",
+	        "comment": "ねこ大好きです",
+	        "work": "猫カフェ経営",
+	        "height": 169.0,
+	        "img": "./img/1.jpg"
+	    }, {
+	        "id": 2,
+	        "nickname": "いぬ",
+	        "age": 20,
+	        "live": "神奈川",
+	        "comment": "いぬ大好きです",
+	        "work": "在宅ワーク",
+	        "height": 159.0,
+	        "img": "./img/2.jpg"
+	    }, {
+	        "id": 3,
+	        "nickname": "とり",
+	        "age": 28,
+	        "live": "京都",
+	        "comment": "鳥肉大好きです",
+	        "work": "野鳥の撮影",
+	        "height": 160.0,
+	        "img": "./img/3.jpg"
+	    }, {
+	        "id": 4,
+	        "nickname": "A",
+	        "age": 30,
+	        "live": "熊本",
+	        "comment": "おはよう",
+	        "work": "エンジニア",
+	        "height": 145.0,
+	        "img": "./img/4.jpg"
+	    }, {
+	        "id": 5,
+	        "nickname": "B",
+	        "age": 31,
+	        "live": "北海道",
+	        "comment": "寒い",
+	        "work": "除雪車の運転",
+	        "height": 150.0,
+	        "img": "./img/5.jpg"
+	    }, {
+	        "id": 6,
+	        "nickname": "C",
+	        "age": 32,
+	        "live": "青森",
+	        "comment": "リンゴおいしい",
+	        "work": "リンゴ園",
+	        "height": 185.0,
+	        "img": "./img/6.jpg"
+	    }, {
+	        "id": 7,
+	        "nickname": "D",
+	        "age": 33,
+	        "live": "秋田",
+	        "comment": "秋田県飽きた",
+	        "work": "農業",
+	        "height": 167.0,
+	        "img": "./img/7.jpg"
+	    }, {
+	        "id": 8,
+	        "nickname": "E",
+	        "age": 34,
+	        "live": "和歌山",
+	        "comment": "白浜きれいだった",
+	        "work": "水泳コーチ",
+	        "height": 166.0,
+	        "img": "./img/8.jpg"
+	    }, {
+	        "id": 9,
+	        "nickname": "F",
+	        "age": 35,
+	        "live": "広島",
+	        "comment": "お好み焼き食べたい",
+	        "work": "お好み焼き屋",
+	        "height": 175.0,
+	        "img": "./img/9.jpg"
+	    }, {
+	        "id": 10,
+	        "nickname": "G",
+	        "age": 36,
+	        "live": "山口",
+	        "comment": "角島よかった～",
+	        "work": "漁師",
+	        "height": 162.0,
+	        "img": "./img/10.jpg"
+	    }];
+
 
 /***/ }
 /******/ ]);
