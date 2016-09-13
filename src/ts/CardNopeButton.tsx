@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import SentimentVeryDissatisfied from 'material-ui/svg-icons/social/sentiment-very-dissatisfied';
+import SentimentVeryDissatisfied from 'material-ui/svg-icons/content/add';
 
 interface CardNopeButtonProps { 
     onNopeClick: () => any;
@@ -29,7 +29,7 @@ export class CardNopeButton extends React.Component<CardNopeButtonProps, {}> {
         e.preventDefault();
     }
     onClickNope(){
-
+        console.log("nope");
     }
     onClickYep(){
     }
