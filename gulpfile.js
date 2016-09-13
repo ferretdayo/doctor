@@ -6,7 +6,7 @@ var webpackConfig = require('./webpack.config.js');
 gulp.task('webpack', function() {
     gulp.src(['./src/ts/*.ts'])
         .pipe(webpack(webpackConfig))
-        .pipe(gulp.dest('./public/scripts'));
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('connect', function() {
