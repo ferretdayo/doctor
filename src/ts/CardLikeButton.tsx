@@ -28,15 +28,10 @@ export class CardLikeButton extends React.Component<CardLikeButtonProps, {}> {
     handleSubmit(e: any){
         e.preventDefault();
     }
-    onClickNope(){
-
-    }
-    onClickYep(){
-    }
     render(){
         return(
             <span className="CardLikeButton" onSubmit={this.handleSubmit}> 
-                <FloatingActionButton onClick={this.onClickYep} style={{marginLeft:'10px'}}>
+                <FloatingActionButton onClick={this.props.onLikeClick} style={{marginLeft:'10px'}}>
                     <SentimentVerySatisfied />
                 </FloatingActionButton>
             </span>

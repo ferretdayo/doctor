@@ -70,6 +70,16 @@ declare module "material-ui" {
     export type TouchTapEventHandler = __MaterialUI.TouchTapEventHandler;
 }
 
+declare module 'material-ui/svg-icons/social/sentiment-very-satisfied' {
+    export import SocialSentimentVerySatisfied = __MaterialUI.SvgIcon;
+    export default SocialSentimentVerySatisfied;
+}
+
+declare module 'material-ui/svg-icons/social/sentiment-very-dissatisfied' {
+    export import SocialSentimentVeryDissatisfied = __MaterialUI.SvgIcon;
+    export default SocialSentimentVeryDissatisfied;
+}
+
 declare namespace __MaterialUI {
     export import React = __React;
 

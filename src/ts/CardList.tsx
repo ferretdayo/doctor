@@ -1,5 +1,4 @@
 import * as React from "react";
-
 /**
  * コンポーネントのimport
  */
@@ -14,6 +13,7 @@ import {UserDetailsType} from "./UserDetailsType";
 
 interface CardListProps{
     CardData: UserInfoType[];
+    CardClass: string;
 }
 
 interface CardListState{
@@ -47,15 +47,27 @@ export class CardList extends React.Component<CardListProps, CardListState>{
             });
         }
         this.setState({data: devideData});
+        
     }
     componentDidMount(){
         this.devideData(this.props.CardData);
     }
     render(){
-        var nodes = this.props.CardData.reverse().map((userInfo) => {
-            return (
-                <CardDetails key={userInfo.id} userData={userInfo} />
-            );
+        var nodes = this.props.CardData.reverse().map((userInfo, index) => {
+            if(userInfo === undefined){
+                return (
+                    <div>ないよ！</div>
+                )
+            }
+            if(index === 0){
+                return (
+                    <CardDetails CardClass={null} key={userInfo.id} userData={userInfo} />
+                );
+            } else {
+                return (
+                    <CardDetails CardClass={this.props.CardClass} key={userInfo.id} userData={userInfo} />
+                );
+            }
         });
         return(
             <div className="CardList">

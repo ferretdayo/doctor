@@ -6,6 +6,7 @@ import {UserInfoType} from "./UserInfoType";
 
 interface CardDetailsProps{
     userData: UserInfoType;
+    CardClass: string;
 }
 
 export class CardDetails extends React.Component<CardDetailsProps, {}>{
@@ -14,7 +15,7 @@ export class CardDetails extends React.Component<CardDetailsProps, {}>{
     }
     render(){
         return(
-            <div className="CardDetails">
+            <div className={'CardDetails ' + this.props.CardClass}>
                 <Card style={{boxShadow: 'none'}}>
                     <CardMedia
                         overlay={<CardTitle title={this.props.userData.nickname + " " + this.props.userData.age + "歳 " + this.props.userData.live} subtitle={this.props.userData.comment} />}
