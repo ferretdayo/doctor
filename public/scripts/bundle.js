@@ -174,14 +174,17 @@
 	        this.currentData = data_1.UserData.shift();
 	        this.setState({ data: [this.currentData, data_1.UserData[0]] });
 	    };
-	    Cards.prototype.onNope = function () {
+	    Cards.prototype.onNope = function (e) {
 	        var _this = this;
+	        e.preventDefault();
 	        //左に移動するアニメーション
 	        $('#1').addClass('rotateOutUpLeft animated');
+	        $('button').attr('disabled', 'disabled');
 	        //アニメーション終了後にStateを更新
 	        setTimeout(function () {
 	            _this.currentData = data_1.UserData.shift();
 	            _this.setState({ data: [_this.currentData, data_1.UserData[0]] });
+	            $('button').removeAttr('disabled');
 	        }, 1000);
 	        // Nopeのユーザをサーバに送信して情報を取得する
 	        // $.ajax({
@@ -199,14 +202,17 @@
 	        //     }.bind(this)                                             
 	        // });
 	    };
-	    Cards.prototype.onLike = function () {
+	    Cards.prototype.onLike = function (e) {
 	        var _this = this;
+	        e.preventDefault();
 	        //右に移動するアニメーション
 	        $('#1').addClass('rotateOutUpRight animated');
+	        $('button').attr('disabled', 'disabled');
 	        //アニメーション終了時にStateを更新
 	        setTimeout(function () {
 	            _this.currentData = data_1.UserData.shift();
 	            _this.setState({ data: [_this.currentData, data_1.UserData[0]] });
+	            $('button').removeAttr('disabled');
 	        }, 1000);
 	        // Likeのユーザをサーバに送信して情報を取得する
 	        // $.ajax({

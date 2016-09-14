@@ -44,14 +44,19 @@ export class Cards extends React.Component<CardsProps, CardsState>{
         this.currentData = UserData.shift();
         this.setState({data: [this.currentData, UserData[0]]});
     }
-    onNope(){
+    onNope(e: any){
+        e.preventDefault();
         //左に移動するアニメーション
         $('#1').addClass('rotateOutUpLeft animated');
+        $('button').attr('disabled', 'disabled');
+
         //アニメーション終了後にStateを更新
         setTimeout(() => {
             this.currentData = UserData.shift();
             this.setState({data: [this.currentData, UserData[0]]});
+            $('button').removeAttr('disabled');
         }, 1000);
+        
         // Nopeのユーザをサーバに送信して情報を取得する
         // $.ajax({
         //     url: '/nope/'+UserData[0].id,
@@ -68,13 +73,17 @@ export class Cards extends React.Component<CardsProps, CardsState>{
         //     }.bind(this)                                             
         // });
     }
-    onLike(){
+    onLike(e: any){
+        e.preventDefault();
         //右に移動するアニメーション
         $('#1').addClass('rotateOutUpRight animated');
+        $('button').attr('disabled', 'disabled');        
+
         //アニメーション終了時にStateを更新
         setTimeout(() => {
             this.currentData = UserData.shift();
             this.setState({data: [this.currentData, UserData[0]]});
+            $('button').removeAttr('disabled');
         }, 1000);
 
         // Likeのユーザをサーバに送信して情報を取得する
