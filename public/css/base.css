@@ -77,6 +77,10 @@ ul {
     top: 0;
 }
 
+.CardNone{
+    position: absolute;
+    top: 0;
+}
 .CardButton {
     height: 20vh;
     text-align: center;

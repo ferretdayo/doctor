@@ -14,7 +14,11 @@ export class CardNone extends React.Component<CardNoneProps, {}>{
             <div className={'CardNone'}>
                 <div className={'row'}>
                     <div className={'col m12 l12 s12'}>
-                        ないよ！！
+                        <div className={'card'}>
+                            <div className={'card-title'}>
+                                カードがありません
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

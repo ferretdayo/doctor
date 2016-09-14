@@ -57,7 +57,7 @@ export class CardList extends React.Component<CardListProps, CardListState>{
             console.log(index);
             // 2枚目がundefinedならば何も返さない
             if(userInfo === undefined && index === 0){
-                return "";
+                return (<CardNone />);
             // 1枚目、2枚目ともundefinedならば内容のHTMLを表示する
             } else if (userInfo === undefined && index === 1){
                 return (

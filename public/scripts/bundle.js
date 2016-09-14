@@ -473,7 +473,7 @@
 	            console.log(index);
 	            // 2枚目がundefinedならば何も返さない
 	            if (userInfo === undefined && index === 0) {
-	                return "";
+	                return (React.createElement(CardNone_1.CardNone, null));
 	            }
 	            else if (userInfo === undefined && index === 1) {
 	                return (React.createElement(CardNone_1.CardNone, null));
@@ -537,7 +537,7 @@
 	        _super.call(this, props);
 	    }
 	    CardNone.prototype.render = function () {
-	        return (React.createElement("div", {className: 'CardNone'}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, "ないよ！！"))));
+	        return (React.createElement("div", {className: 'CardNone'}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-title'}, "カードがありません"))))));
 	    };
 	    return CardNone;
 	}(React.Component));
