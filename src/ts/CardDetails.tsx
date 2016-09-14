@@ -1,12 +1,10 @@
 import * as React from "react";
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-
 import {UserInfoType} from "./UserInfoType";
 
 interface CardDetailsProps{
     userData: UserInfoType;
-    CardClass: string;
+    Index: number;
 }
 
 export class CardDetails extends React.Component<CardDetailsProps, {}>{
@@ -15,17 +13,28 @@ export class CardDetails extends React.Component<CardDetailsProps, {}>{
     }
     render(){
         return(
-            <div className={'CardDetails ' + this.props.CardClass}>
-                <Card style={{boxShadow: 'none'}}>
-                    <CardMedia
-                        overlay={<CardTitle title={this.props.userData.nickname + " " + this.props.userData.age + "歳 " + this.props.userData.live} subtitle={this.props.userData.comment} />}
-                    >
-                    <img src={this.props.userData.img} />
-                    </CardMedia>
-                    <CardText style={{textAlign:'center'}}>
-                    {this.props.userData.work + " " + this.props.userData.height + "cm"}
-                    </CardText>
-                </Card>
+            <div className={'CardDetails'} id={this.props.Index}>
+                <div className={'row'}>
+                    <div className={'col m12 l12 s12'}>
+                        <div className={'card'}>
+                            <div className={'card-image'}>
+                                <img src={this.props.userData.img} />
+                                <span className={'card-title'} style={{ width: '100%', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                                    <span style={{fontSize: '20px'}}>
+                                        {this.props.userData.nickname + " " + this.props.userData.age + "歳 " + this.props.userData.live}
+                                    </span>
+                                    <br />
+                                    <span style={{fontSize: '16px'}}>
+                                        {this.props.userData.comment}
+                                    </span>
+                                </span>
+                            </div>
+                            <div className={'card-content'} style={{textAlign: 'center'}}>
+                                {this.props.userData.work + " " + this.props.userData.height + "cm"}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

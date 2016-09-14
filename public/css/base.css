@@ -62,7 +62,7 @@ ul {
     padding-left: 30px;
 }
 
-.Card {
+.Cards {
     height: 100vh;
 }
 
@@ -74,6 +74,7 @@ ul {
 
 .CardDetails {
     position: absolute;
+    top: 0;
 }
 
 .CardButton {

@@ -3,6 +3,7 @@ import * as React from "react";
  * コンポーネントのimport
  */
 import {CardDetails} from "./CardDetails";
+import {CardNone} from "./CardNone";
 
 /**
  * 型のimport
@@ -13,7 +14,6 @@ import {UserDetailsType} from "./UserDetailsType";
 
 interface CardListProps{
     CardData: UserInfoType[];
-    CardClass: string;
 }
 
 interface CardListState{
@@ -54,18 +54,23 @@ export class CardList extends React.Component<CardListProps, CardListState>{
     }
     render(){
         var nodes = this.props.CardData.reverse().map((userInfo, index) => {
-            if(userInfo === undefined){
+            console.log(index);
+            // 2枚目がundefinedならば何も返さない
+            if(userInfo === undefined && index === 0){
+                return "";
+            // 1枚目、2枚目ともundefinedならば内容のHTMLを表示する
+            } else if (userInfo === undefined && index === 1){
                 return (
-                    <div>ないよ！</div>
-                )
+                    <CardNone />
+                );
             }
             if(index === 0){
                 return (
-                    <CardDetails CardClass={null} key={userInfo.id} userData={userInfo} />
+                    <CardDetails Index={index} key={userInfo.id} userData={userInfo} />
                 );
             } else {
                 return (
-                    <CardDetails CardClass={this.props.CardClass} key={userInfo.id} userData={userInfo} />
+                    <CardDetails Index={index} key={userInfo.id} userData={userInfo} />
                 );
             }
         });

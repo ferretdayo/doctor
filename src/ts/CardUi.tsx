@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Card} from "./Card";
+import {Cards} from "./Cards";
 
 interface CardUiProps{
 }
@@ -50,7 +50,7 @@ export class CardUi extends React.Component<CardUiProps, {}> {
     render() {
         return (
         <div className="CardUi">
-            <Card url="/users" />
+            <Cards url="/users" />
         </div>
         );
     }

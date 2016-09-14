@@ -8,21 +8,20 @@ import {CardList} from "./CardList";
 
 import {UserInfoType} from "./UserInfoType";
 
-interface CardProps{
+interface CardsProps{
     url: string;
 }
 
-interface CardState{
+interface CardsState{
     data : UserInfoType[];
-    cardState: boolean;
 }
 
-export class Card extends React.Component<CardProps, CardState>{
-    classData: string;
-    constructor(props: CardProps) {
+export class Cards extends React.Component<CardsProps, CardsState>{
+    currentData: UserInfoType;
+    constructor(props: CardsProps) {
         super(props);
         //Stateの初期化
-        this.state = {data: [], cardState: undefined};
+        this.state = {data: []};
         //関数のバインド
         //this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -42,11 +41,17 @@ export class Card extends React.Component<CardProps, CardState>{
         //     }.bind(this)                                             
         // });
         // shift()でデータなければ'undefined'が配列に入る
-        this.setState({data: [UserData.shift(), UserData[0]], cardState: undefined});
+        this.currentData = UserData.shift();
+        this.setState({data: [this.currentData, UserData[0]]});
     }
     onNope(){
-
-        this.setState({data: [UserData.shift(), UserData[0]], cardState: false});
+        //左に移動するアニメーション
+        $('#1').addClass('rotateOutUpLeft animated');
+        //アニメーション終了後にStateを更新
+        setTimeout(() => {
+            this.currentData = UserData.shift();
+            this.setState({data: [this.currentData, UserData[0]]});
+        }, 1000);
         // Nopeのユーザをサーバに送信して情報を取得する
         // $.ajax({
         //     url: '/nope/'+UserData[0].id,
@@ -64,6 +69,14 @@ export class Card extends React.Component<CardProps, CardState>{
         // });
     }
     onLike(){
+        //右に移動するアニメーション
+        $('#1').addClass('rotateOutUpRight animated');
+        //アニメーション終了時にStateを更新
+        setTimeout(() => {
+            this.currentData = UserData.shift();
+            this.setState({data: [this.currentData, UserData[0]]});
+        }, 1000);
+
         // Likeのユーザをサーバに送信して情報を取得する
         // $.ajax({
         //     url: '/like/'+UserData[0].id,
@@ -84,20 +97,14 @@ export class Card extends React.Component<CardProps, CardState>{
         this.loadUserInfo();
     }
     render(){
-        
-        if(this.state.cardState === undefined) {
-            this.classData = 'CardList';
-        } else if(this.state.cardState === true) {
-            this.classData = 'CardList ' + 'rotateOutUpLeft ' + 'animated';
-        } else if(this.state.cardState === true) {
-            this.classData = 'CardList ' + 'rotateOutUpRight ' + 'animated';
-        }
         return(
-            <div className="Card">
-                <CardList CardClass={this.classData} CardData={this.state.data} />
-                <div>
-                    <CardNopeButton onNopeClick={this.onNope.bind(this)} />
-                    <CardLikeButton onLikeClick={this.onLike} />
+            <div className="Cards">
+                <div className={'row'}>
+                    <CardList CardData={this.state.data} />
+                    <div>
+                        <CardNopeButton onNopeClick={this.onNope.bind(this)} />
+                        <CardLikeButton onLikeClick={this.onLike.bind(this)} />
+                    </div>
                 </div>
             </div>
         );

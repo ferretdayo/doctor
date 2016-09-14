@@ -10,7 +10,7 @@
     "files": [
         "./typings/index.d.ts",
         "./src/ts/index.tsx",
-        "./src/ts/Card.tsx",
+        "./src/ts/Cards.tsx",
         "./src/ts/CardLikeButton.tsx",
         "./src/ts/CardNopeButton.tsx",
         "./src/ts/CardDetails.tsx",
