@@ -234,7 +234,7 @@
 	        this.loadUserInfo();
 	    };
 	    Cards.prototype.render = function () {
-	        return (React.createElement("div", {className: "Cards"}, React.createElement("div", {className: 'row'}, React.createElement(CardList_1.CardList, {CardData: this.state.data}), React.createElement("div", null, React.createElement(CardNopeButton_1.CardNopeButton, {onNopeClick: this.onNope.bind(this)}), React.createElement(CardLikeButton_1.CardLikeButton, {onLikeClick: this.onLike.bind(this)})))));
+	        return (React.createElement("div", {className: "Cards"}, React.createElement("div", {className: 'row'}, React.createElement(CardList_1.CardList, {CardData: this.state.data}), React.createElement("div", {style: { textAlign: 'center' }}, React.createElement(CardNopeButton_1.CardNopeButton, {onNopeClick: this.onNope.bind(this)}), React.createElement(CardLikeButton_1.CardLikeButton, {onLikeClick: this.onLike.bind(this)})))));
 	    };
 	    return Cards;
 	}(React.Component));
@@ -515,6 +515,12 @@
 	    __extends(CardDetails, _super);
 	    function CardDetails(props) {
 	        _super.call(this, props);
+	        /*
+	         <div className={'carousel carousel-slider'} data-indicators="true">
+	                                    <img className={'carousel-item'} src={this.props.userData.img} />
+	                                    <img className={'carousel-item'} src={this.props.userData.img} />
+	                                    <img className={'carousel-item'} src={this.props.userData.img} />
+	        */
 	    }
 	    CardDetails.prototype.render = function () {
 	        return (React.createElement("div", {className: 'CardDetails', id: this.props.Index}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-image'}, React.createElement("img", {src: this.props.userData.img}), React.createElement("span", {className: 'card-title', style: { width: '100%', backgroundColor: 'rgba(0,0,0,0.5)' }}, React.createElement("span", {style: { fontSize: '20px' }}, this.props.userData.nickname + " " + this.props.userData.age + "歳 " + this.props.userData.live), React.createElement("br", null), React.createElement("span", {style: { fontSize: '16px' }}, this.props.userData.comment))), React.createElement("div", {className: 'card-content', style: { textAlign: 'center' }}, this.props.userData.work + " " + this.props.userData.height + "cm"))))));
@@ -543,7 +549,7 @@
 	        _super.call(this, props);
 	    }
 	    CardNone.prototype.render = function () {
-	        return (React.createElement("div", {className: 'CardNone'}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-title'}, "カードがありません"))))));
+	        return (React.createElement("div", {className: 'CardNone'}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-title'}, React.createElement("p", {className: 'nothing'}, "カードがありません")))))));
 	    };
 	    return CardNone;
 	}(React.Component));

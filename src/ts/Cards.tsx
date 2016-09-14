@@ -110,7 +110,7 @@ export class Cards extends React.Component<CardsProps, CardsState>{
             <div className="Cards">
                 <div className={'row'}>
                     <CardList CardData={this.state.data} />
-                    <div>
+                    <div style={{textAlign: 'center'}}>
                         <CardNopeButton onNopeClick={this.onNope.bind(this)} />
                         <CardLikeButton onLikeClick={this.onLike.bind(this)} />
                     </div>

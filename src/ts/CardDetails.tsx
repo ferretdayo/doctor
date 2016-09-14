@@ -10,6 +10,12 @@ interface CardDetailsProps{
 export class CardDetails extends React.Component<CardDetailsProps, {}>{
     constructor(props: CardDetailsProps) {
         super(props);
+        /*
+         <div className={'carousel carousel-slider'} data-indicators="true">
+                                    <img className={'carousel-item'} src={this.props.userData.img} />
+                                    <img className={'carousel-item'} src={this.props.userData.img} />
+                                    <img className={'carousel-item'} src={this.props.userData.img} />
+        */
     }
     render(){
         return(
