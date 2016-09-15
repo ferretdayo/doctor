@@ -14,6 +14,7 @@ import {UserDetailsType} from "./UserDetailsType";
 
 interface CardListProps{
     CardData: UserInfoType[];
+    Animation: string;
 }
 
 interface CardListState{
@@ -28,49 +29,54 @@ export class CardList extends React.Component<CardListProps, CardListState>{
         //関数のバインド
         //this.handleSubmit = this.handleSubmit.bind(this);
     }
-    devideData(data: any){
-        let devideData: any = [];
-        for(let i = 0; i < data.length; i++){
-            let forImg = {
-                img: data.img,
-                nickname: data.nickname,
-                age: data.age,
-                live: data.live
-            };
-            let forDetails = {
-                work: data.work,
-                height: data.height
-            };
-            devideData.push({
-                img: forImg,
-                details: forDetails
-            });
-        }
-        this.setState({data: devideData});
+    // devideData(data: any){
+    //     let devideData: any = [];
+    //     for(let i = 0; i < data.length; i++){
+    //         let forImg = {
+    //             img: data.img,
+    //             nickname: data.nickname,
+    //             age: data.age,
+    //             live: data.live
+    //         };
+    //         let forDetails = {
+    //             work: data.work,
+    //             height: data.height
+    //         };
+    //         devideData.push({
+    //             img: forImg,
+    //             details: forDetails
+    //         });
+    //     }
+    //     this.setState({data: devideData});
         
-    }
-    componentDidMount(){
-        this.devideData(this.props.CardData);
-    }
+    // }
+    // componentDidMount(){
+    //     //this.devideData(this.props.CardData);
+    // }
     render(){
-        var nodes = this.props.CardData.reverse().map((userInfo, index) => {
+        //配列のコピー
+        var users = this.props.CardData.concat().reverse();
+        var nodes = users.map((userInfo, index) => {
             console.log(index);
             // 2枚目がundefinedならば何も返さない
             if(userInfo === undefined && index === 0){
-                return (<CardNone />);
+                return (
+                    <CardNone />
+                );
             // 1枚目、2枚目ともundefinedならば内容のHTMLを表示する
             } else if (userInfo === undefined && index === 1){
                 return (
                     <CardNone />
                 );
             }
+            //下のレイヤー
             if(index === 0){
                 return (
-                    <CardDetails Index={index} key={userInfo.id} userData={userInfo} />
+                    <CardDetails Index={index} key={userInfo.id} userData={userInfo} Animation={''} />
                 );
             } else {
                 return (
-                    <CardDetails Index={index} key={userInfo.id} userData={userInfo} />
+                    <CardDetails Index={index} key={userInfo.id} userData={userInfo} Animation={this.props.Animation} />
                 );
             }
         });

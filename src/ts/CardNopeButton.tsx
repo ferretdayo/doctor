@@ -2,6 +2,8 @@ import * as React from "react";
 
 interface CardNopeButtonProps { 
     onNopeClick: () => any;
+    Disabled: boolean;
+    Hidden: Boolean;
 }
 
 export class CardNopeButton extends React.Component<CardNopeButtonProps, {}> {
@@ -27,8 +29,8 @@ export class CardNopeButton extends React.Component<CardNopeButtonProps, {}> {
     }
     render(){
         return(
-            <span className="CardNopeButton"> 
-                <button className={'btn-floating btn-large waves-effect waves-light red'} onClick={this.props.onNopeClick} style={{marginRight:'10px'}}>
+            <span className="CardNopeButton" hidden={this.props.Hidden}> 
+                <button className={'btn-floating btn-large waves-effect waves-light red'} onClick={this.props.onNopeClick} style={{marginRight:'10px'}} disabled={this.props.Disabled}>
                     <i className="material-icons">sentiment_very_dissatisfied</i>
                 </button>
             </span>

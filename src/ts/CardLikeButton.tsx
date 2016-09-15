@@ -2,6 +2,8 @@ import * as React from "react";
 
 interface CardLikeButtonProps { 
     onLikeClick: () => any;
+    Disabled: boolean;
+    Hidden: boolean;
 }
 
 export class CardLikeButton extends React.Component<CardLikeButtonProps, {}> {
@@ -27,8 +29,8 @@ export class CardLikeButton extends React.Component<CardLikeButtonProps, {}> {
     }
     render(){
         return(
-            <span className="CardLikeButton"> 
-                <button className={'btn-floating btn-large waves-effect waves-light blue'} onClick={this.props.onLikeClick} style={{marginLeft:'10px'}}>
+            <span className="CardLikeButton" hidden={this.props.Hidden}> 
+                <button className={'btn-floating btn-large waves-effect waves-light blue'} onClick={this.props.onLikeClick} style={{marginLeft:'10px'}} disabled={this.props.Disabled}>
                     <i className="material-icons">sentiment_very_satisfied</i>
                 </button>
             </span>

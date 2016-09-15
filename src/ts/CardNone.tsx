@@ -11,7 +11,7 @@ export class CardNone extends React.Component<CardNoneProps, {}>{
     }
     render(){
         return(
-            <div className={'CardNone'}>
+            <div className={'CardNone'} style={{width: '100%', textAlign: 'center'}}>
                 <div className={'row'}>
                     <div className={'col m12 l12 s12'}>
                         <div className={'card'}>

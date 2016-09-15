@@ -5,6 +5,7 @@ import {UserInfoType} from "./UserInfoType";
 interface CardDetailsProps{
     userData: UserInfoType;
     Index: number;
+    Animation: string;
 }
 
 export class CardDetails extends React.Component<CardDetailsProps, {}>{
@@ -19,7 +20,7 @@ export class CardDetails extends React.Component<CardDetailsProps, {}>{
     }
     render(){
         return(
-            <div className={'CardDetails'} id={this.props.Index}>
+            <div className={'CardDetails ' + this.props.Animation} id={this.props.Index}>
                 <div className={'row'}>
                     <div className={'col m12 l12 s12'}>
                         <div className={'card'}>

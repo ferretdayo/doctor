@@ -151,7 +151,7 @@
 	    function Cards(props) {
 	        _super.call(this, props);
 	        //Stateの初期化
-	        this.state = { data: [] };
+	        this.state = { data: [], animation: '', disabled: false, hidden: false };
 	        //関数のバインド
 	        //this.handleSubmit = this.handleSubmit.bind(this);
 	    }
@@ -171,20 +171,28 @@
 	        //     }.bind(this)                                             
 	        // });
 	        // shift()でデータなければ'undefined'が配列に入る
-	        this.currentData = data_1.UserData.shift();
-	        this.setState({ data: [this.currentData, data_1.UserData[0]] });
+	        this.currentData = [data_1.UserData.shift(), data_1.UserData[0]];
+	        this.checkData(this.currentData);
+	        this.setState({ data: this.currentData, animation: '', disabled: false, hidden: false });
+	    };
+	    Cards.prototype.checkData = function (data) {
+	        if (data[0] === undefined && data[1] === undefined) {
+	            this.setState({ data: this.state.data, animation: '', disabled: this.state.disabled, hidden: true });
+	        }
 	    };
 	    Cards.prototype.onNope = function (e) {
 	        var _this = this;
 	        e.preventDefault();
 	        //左に移動するアニメーション
-	        $('#1').addClass('rotateOutUpLeft animated');
-	        $('button').attr('disabled', 'disabled');
+	        // $('#1').addClass('rotateOutUpLeft animated');
+	        // $('button').attr('disabled', 'disabled');
+	        this.setState({ data: this.state.data, animation: 'rotateOutUpLeft animated', disabled: true, hidden: this.state.hidden });
 	        //アニメーション終了後にStateを更新
 	        setTimeout(function () {
-	            _this.currentData = data_1.UserData.shift();
-	            _this.setState({ data: [_this.currentData, data_1.UserData[0]] });
-	            $('button').removeAttr('disabled');
+	            _this.currentData = [data_1.UserData.shift(), data_1.UserData[0]];
+	            _this.checkData(_this.currentData);
+	            _this.setState({ data: _this.currentData, animation: '', disabled: false, hidden: _this.state.hidden });
+	            //$('button').removeAttr('disabled');
 	        }, 1000);
 	        // Nopeのユーザをサーバに送信して情報を取得する
 	        // $.ajax({
@@ -206,13 +214,15 @@
 	        var _this = this;
 	        e.preventDefault();
 	        //右に移動するアニメーション
-	        $('#1').addClass('rotateOutUpRight animated');
-	        $('button').attr('disabled', 'disabled');
+	        // $('#1').addClass('rotateOutUpRight animated');
+	        // $('button').attr('disabled', 'disabled');
+	        this.setState({ data: this.state.data, animation: 'rotateOutUpRight animated', disabled: true, hidden: this.state.hidden });
 	        //アニメーション終了時にStateを更新
 	        setTimeout(function () {
-	            _this.currentData = data_1.UserData.shift();
-	            _this.setState({ data: [_this.currentData, data_1.UserData[0]] });
-	            $('button').removeAttr('disabled');
+	            _this.currentData = [data_1.UserData.shift(), data_1.UserData[0]];
+	            _this.checkData(_this.currentData);
+	            _this.setState({ data: _this.currentData, animation: '', disabled: false, hidden: _this.state.hidden });
+	            //$('button').removeAttr('disabled');
 	        }, 1000);
 	        // Likeのユーザをサーバに送信して情報を取得する
 	        // $.ajax({
@@ -234,7 +244,7 @@
 	        this.loadUserInfo();
 	    };
 	    Cards.prototype.render = function () {
-	        return (React.createElement("div", {className: "Cards"}, React.createElement("div", {className: 'row'}, React.createElement(CardList_1.CardList, {CardData: this.state.data}), React.createElement("div", {style: { textAlign: 'center' }}, React.createElement(CardNopeButton_1.CardNopeButton, {onNopeClick: this.onNope.bind(this)}), React.createElement(CardLikeButton_1.CardLikeButton, {onLikeClick: this.onLike.bind(this)})))));
+	        return (React.createElement("div", {className: "Cards"}, React.createElement(CardList_1.CardList, {CardData: this.state.data, Animation: this.state.animation}), React.createElement("div", {style: { textAlign: 'center' }}, React.createElement(CardNopeButton_1.CardNopeButton, {onNopeClick: this.onNope.bind(this), Disabled: this.state.disabled, Hidden: this.state.hidden}), React.createElement(CardLikeButton_1.CardLikeButton, {onLikeClick: this.onLike.bind(this), Disabled: this.state.disabled, Hidden: this.state.hidden}))));
 	    };
 	    return Cards;
 	}(React.Component));
@@ -376,7 +386,7 @@
 	        e.preventDefault();
 	    };
 	    CardNopeButton.prototype.render = function () {
-	        return (React.createElement("span", {className: "CardNopeButton"}, React.createElement("button", {className: 'btn-floating btn-large waves-effect waves-light red', onClick: this.props.onNopeClick, style: { marginRight: '10px' }}, React.createElement("i", {className: "material-icons"}, "sentiment_very_dissatisfied"))));
+	        return (React.createElement("span", {className: "CardNopeButton", hidden: this.props.Hidden}, React.createElement("button", {className: 'btn-floating btn-large waves-effect waves-light red', onClick: this.props.onNopeClick, style: { marginRight: '10px' }, disabled: this.props.Disabled}, React.createElement("i", {className: "material-icons"}, "sentiment_very_dissatisfied"))));
 	    };
 	    return CardNopeButton;
 	}(React.Component));
@@ -418,7 +428,7 @@
 	        e.preventDefault();
 	    };
 	    CardLikeButton.prototype.render = function () {
-	        return (React.createElement("span", {className: "CardLikeButton"}, React.createElement("button", {className: 'btn-floating btn-large waves-effect waves-light blue', onClick: this.props.onLikeClick, style: { marginLeft: '10px' }}, React.createElement("i", {className: "material-icons"}, "sentiment_very_satisfied"))));
+	        return (React.createElement("span", {className: "CardLikeButton", hidden: this.props.Hidden}, React.createElement("button", {className: 'btn-floating btn-large waves-effect waves-light blue', onClick: this.props.onLikeClick, style: { marginLeft: '10px' }, disabled: this.props.Disabled}, React.createElement("i", {className: "material-icons"}, "sentiment_very_satisfied"))));
 	    };
 	    return CardLikeButton;
 	}(React.Component));
@@ -451,31 +461,34 @@
 	        //関数のバインド
 	        //this.handleSubmit = this.handleSubmit.bind(this);
 	    }
-	    CardList.prototype.devideData = function (data) {
-	        var devideData = [];
-	        for (var i = 0; i < data.length; i++) {
-	            var forImg = {
-	                img: data.img,
-	                nickname: data.nickname,
-	                age: data.age,
-	                live: data.live
-	            };
-	            var forDetails = {
-	                work: data.work,
-	                height: data.height
-	            };
-	            devideData.push({
-	                img: forImg,
-	                details: forDetails
-	            });
-	        }
-	        this.setState({ data: devideData });
-	    };
-	    CardList.prototype.componentDidMount = function () {
-	        this.devideData(this.props.CardData);
-	    };
+	    // devideData(data: any){
+	    //     let devideData: any = [];
+	    //     for(let i = 0; i < data.length; i++){
+	    //         let forImg = {
+	    //             img: data.img,
+	    //             nickname: data.nickname,
+	    //             age: data.age,
+	    //             live: data.live
+	    //         };
+	    //         let forDetails = {
+	    //             work: data.work,
+	    //             height: data.height
+	    //         };
+	    //         devideData.push({
+	    //             img: forImg,
+	    //             details: forDetails
+	    //         });
+	    //     }
+	    //     this.setState({data: devideData});
+	    // }
+	    // componentDidMount(){
+	    //     //this.devideData(this.props.CardData);
+	    // }
 	    CardList.prototype.render = function () {
-	        var nodes = this.props.CardData.reverse().map(function (userInfo, index) {
+	        var _this = this;
+	        //配列のコピー
+	        var users = this.props.CardData.concat().reverse();
+	        var nodes = users.map(function (userInfo, index) {
 	            console.log(index);
 	            // 2枚目がundefinedならば何も返さない
 	            if (userInfo === undefined && index === 0) {
@@ -484,11 +497,12 @@
 	            else if (userInfo === undefined && index === 1) {
 	                return (React.createElement(CardNone_1.CardNone, null));
 	            }
+	            //下のレイヤー
 	            if (index === 0) {
-	                return (React.createElement(CardDetails_1.CardDetails, {Index: index, key: userInfo.id, userData: userInfo}));
+	                return (React.createElement(CardDetails_1.CardDetails, {Index: index, key: userInfo.id, userData: userInfo, Animation: ''}));
 	            }
 	            else {
-	                return (React.createElement(CardDetails_1.CardDetails, {Index: index, key: userInfo.id, userData: userInfo}));
+	                return (React.createElement(CardDetails_1.CardDetails, {Index: index, key: userInfo.id, userData: userInfo, Animation: _this.props.Animation}));
 	            }
 	        });
 	        return (React.createElement("div", {className: "CardList"}, nodes));
@@ -523,7 +537,7 @@
 	        */
 	    }
 	    CardDetails.prototype.render = function () {
-	        return (React.createElement("div", {className: 'CardDetails', id: this.props.Index}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-image'}, React.createElement("img", {src: this.props.userData.img}), React.createElement("span", {className: 'card-title', style: { width: '100%', backgroundColor: 'rgba(0,0,0,0.5)' }}, React.createElement("span", {style: { fontSize: '20px' }}, this.props.userData.nickname + " " + this.props.userData.age + "歳 " + this.props.userData.live), React.createElement("br", null), React.createElement("span", {style: { fontSize: '16px' }}, this.props.userData.comment))), React.createElement("div", {className: 'card-content', style: { textAlign: 'center' }}, this.props.userData.work + " " + this.props.userData.height + "cm"))))));
+	        return (React.createElement("div", {className: 'CardDetails ' + this.props.Animation, id: this.props.Index}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-image'}, React.createElement("img", {src: this.props.userData.img}), React.createElement("span", {className: 'card-title', style: { width: '100%', backgroundColor: 'rgba(0,0,0,0.5)' }}, React.createElement("span", {style: { fontSize: '20px' }}, this.props.userData.nickname + " " + this.props.userData.age + "歳 " + this.props.userData.live), React.createElement("br", null), React.createElement("span", {style: { fontSize: '16px' }}, this.props.userData.comment))), React.createElement("div", {className: 'card-content', style: { textAlign: 'center' }}, this.props.userData.work + " " + this.props.userData.height + "cm"))))));
 	    };
 	    return CardDetails;
 	}(React.Component));
@@ -549,7 +563,7 @@
 	        _super.call(this, props);
 	    }
 	    CardNone.prototype.render = function () {
-	        return (React.createElement("div", {className: 'CardNone'}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-title'}, React.createElement("p", {className: 'nothing'}, "カードがありません")))))));
+	        return (React.createElement("div", {className: 'CardNone', style: { width: '100%', textAlign: 'center' }}, React.createElement("div", {className: 'row'}, React.createElement("div", {className: 'col m12 l12 s12'}, React.createElement("div", {className: 'card'}, React.createElement("div", {className: 'card-title'}, React.createElement("p", {className: 'nothing'}, "カードがありません")))))));
 	    };
 	    return CardNone;
 	}(React.Component));

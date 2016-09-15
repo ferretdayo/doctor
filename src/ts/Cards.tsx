@@ -14,14 +14,17 @@ interface CardsProps{
 
 interface CardsState{
     data : UserInfoType[];
+    animation: string;
+    disabled: boolean;
+    hidden: boolean;
 }
 
 export class Cards extends React.Component<CardsProps, CardsState>{
-    currentData: UserInfoType;
+    currentData: UserInfoType[];
     constructor(props: CardsProps) {
         super(props);
         //Stateの初期化
-        this.state = {data: []};
+        this.state = {data: [], animation: '', disabled: false, hidden: false};
         //関数のバインド
         //this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -41,20 +44,28 @@ export class Cards extends React.Component<CardsProps, CardsState>{
         //     }.bind(this)                                             
         // });
         // shift()でデータなければ'undefined'が配列に入る
-        this.currentData = UserData.shift();
-        this.setState({data: [this.currentData, UserData[0]]});
+        this.currentData = [UserData.shift(), UserData[0]];
+        this.checkData(this.currentData);
+        this.setState({data: this.currentData, animation: '', disabled: false, hidden: false});
+    }
+    checkData(data: any){
+        if(data[0] === undefined && data[1] === undefined){
+            this.setState({data: this.state.data, animation:'', disabled: this.state.disabled, hidden: true});
+        }
     }
     onNope(e: any){
         e.preventDefault();
         //左に移動するアニメーション
-        $('#1').addClass('rotateOutUpLeft animated');
-        $('button').attr('disabled', 'disabled');
+        // $('#1').addClass('rotateOutUpLeft animated');
+        // $('button').attr('disabled', 'disabled');
+        this.setState({data: this.state.data, animation: 'rotateOutUpLeft animated', disabled: true, hidden: this.state.hidden});
 
         //アニメーション終了後にStateを更新
         setTimeout(() => {
-            this.currentData = UserData.shift();
-            this.setState({data: [this.currentData, UserData[0]]});
-            $('button').removeAttr('disabled');
+            this.currentData = [UserData.shift(), UserData[0]];
+            this.checkData(this.currentData);
+            this.setState({data: this.currentData, animation: '', disabled: false, hidden: this.state.hidden});
+            //$('button').removeAttr('disabled');
         }, 1000);
         
         // Nopeのユーザをサーバに送信して情報を取得する
@@ -76,14 +87,16 @@ export class Cards extends React.Component<CardsProps, CardsState>{
     onLike(e: any){
         e.preventDefault();
         //右に移動するアニメーション
-        $('#1').addClass('rotateOutUpRight animated');
-        $('button').attr('disabled', 'disabled');        
+        // $('#1').addClass('rotateOutUpRight animated');
+        // $('button').attr('disabled', 'disabled');
+        this.setState({data: this.state.data, animation: 'rotateOutUpRight animated', disabled: true, hidden: this.state.hidden});   
 
         //アニメーション終了時にStateを更新
         setTimeout(() => {
-            this.currentData = UserData.shift();
-            this.setState({data: [this.currentData, UserData[0]]});
-            $('button').removeAttr('disabled');
+            this.currentData = [UserData.shift(), UserData[0]];
+            this.checkData(this.currentData);
+            this.setState({data: this.currentData, animation: '', disabled: false, hidden: this.state.hidden});
+            //$('button').removeAttr('disabled');
         }, 1000);
 
         // Likeのユーザをサーバに送信して情報を取得する
@@ -108,12 +121,10 @@ export class Cards extends React.Component<CardsProps, CardsState>{
     render(){
         return(
             <div className="Cards">
-                <div className={'row'}>
-                    <CardList CardData={this.state.data} />
-                    <div style={{textAlign: 'center'}}>
-                        <CardNopeButton onNopeClick={this.onNope.bind(this)} />
-                        <CardLikeButton onLikeClick={this.onLike.bind(this)} />
-                    </div>
+                <CardList CardData={this.state.data} Animation={this.state.animation} />
+                <div style={{textAlign: 'center'}}>
+                    <CardNopeButton onNopeClick={this.onNope.bind(this)} Disabled={this.state.disabled} Hidden={this.state.hidden} />
+                    <CardLikeButton onLikeClick={this.onLike.bind(this)} Disabled={this.state.disabled} Hidden={this.state.hidden} />
                 </div>
             </div>
         );
