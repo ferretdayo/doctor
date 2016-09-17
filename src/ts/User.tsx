@@ -12,7 +12,7 @@ export class User extends React.Component<UserProps, {}>{
     }
     render(){
         return(
-            <li className={'User collection-item avatar'}>
+            <li className={'User collection-item avatar'} style={{cursor: 'pointer'}}>
                 <img src={this.props.UserInfo.img} alt="" className="circle" />
                 <span>{this.props.UserInfo.author}</span>
                 <p className="hide-on-med-and-down">{this.props.UserInfo.text}</p>

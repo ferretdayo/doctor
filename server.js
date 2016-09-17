@@ -15,8 +15,25 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var mysql = require('mysql');
+// var connection = mysql.createConnection({
+//     host: 'ferret',
+//     user: 'ferret',
+//     password: 'ferret'
+// });
+
+// connection.connect(function(err) {
+//     if (err) {
+//         console.error('error connecting: ' + err.stack);
+//         return;
+//     }
+
+//     console.log('connected as id ' + connection.threadId);
+// });
+
 
 var COMMENTS_FILE = path.join(__dirname, 'comments.json');
+var COMMENTS_CARTMAN_FILE = path.join(__dirname, 'comments_cartman.json');
 var USERS_FILE = path.join(__dirname, 'userlist.json');
 
 app.set('port', (process.env.PORT || 3000));
@@ -37,7 +54,17 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/comments', function(req, res) {
-    fs.readFile(COMMENTS_FILE, function(err, data) {
+    // connection.query('SELECT * FROM `books` WHERE `author` = "David"', function (error, results, fields) {
+
+    // });
+    var file = "";
+    var user = req.body.author;
+    if (user === 'ケニー') {
+        file = COMMENTS_FILE;
+    } else {
+        file = COMMENTS_CARTMAN_FILE;
+    }
+    fs.readFile(file, function(err, data) {
         if (err) {
             console.error(err);
             process.exit(1);
@@ -60,6 +87,7 @@ app.post('/api/comments', function(req, res) {
             id: Date.now(),
             author: req.body.author,
             text: req.body.text,
+            img: req.body.img,
         };
         comments.push(newComment);
         fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {

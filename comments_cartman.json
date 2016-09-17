@@ -2,7 +2,7 @@
     {
         "id": 1388534400000,
         "author": "Kenny",
-        "img": "./img/1.jpg",
+        "img": ".\/img\/1.jpg",
         "text": "Hey there!"
     },
     {
@@ -14,7 +14,7 @@
     {
         "id": 1473380343351,
         "author": "Kenny",
-        "img": "./img/1.jpg",
+        "img": ".\/img\/1.jpg",
         "text": "dayo"
     },
     {
@@ -27,30 +27,30 @@
         "id": 1474097541750,
         "author": "You",
         "img": "",
-        "text": "おおお"
+        "text": "\u304a\u304a\u304a"
     },
     {
         "id": 1474097546431,
         "author": "You",
         "img": "",
-        "text": "おおおおおおおおおお"
+        "text": "\u304a\u304a\u304a\u304a\u304a\u304a\u304a\u304a\u304a\u304a"
     },
     {
         "id": 1474097762942,
         "author": "You",
-        "text": "おおお",
+        "text": "\u304a\u304a\u304a",
         "img": ""
     },
     {
         "id": 1474104090605,
         "author": "You",
-        "text": "あいうえおｋあｋいｋうｋえｋお",
+        "text": "\u3042\u3044\u3046\u3048\u304a\uff4b\u3042\uff4b\u3044\uff4b\u3046\uff4b\u3048\uff4b\u304a",
         "img": ""
     },
     {
         "id": 1474104098494,
         "author": "You",
-        "text": "おおおお",
+        "text": "\u304a\u304a\u304a\u304a",
         "img": ""
     },
     {
@@ -63,18 +63,12 @@
         "id": 1474105249860,
         "author": "You",
         "img": "",
-        "text": "Hい"
+        "text": "H\u3044"
     },
     {
         "id": 1474106530668,
         "author": "You",
         "img": "",
         "text": "ooo"
-    },
-    {
-        "id": 1474112061806,
-        "author": "You",
-        "text": "いいい",
-        "img": ""
     }
 ]

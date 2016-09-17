@@ -19,9 +19,9 @@ export class UserList extends React.Component<UserListProps, UserListState>{
     //コメントをサーバから取得する関数
     loadCommentsFromServer() {                                           
         $.ajax({                                                                     
-            url: "/api/userlist",                                                       
-            dataType: 'json',                                                          
-            cache: false,                                                              
+            url: "/api/userlist",
+            dataType: 'json',
+            cache: false,
             success: function(data: any) {
                 //現在のコメント情報をstateに記憶させる                                                  
                 this.setState({data: data});                                             
@@ -45,9 +45,16 @@ export class UserList extends React.Component<UserListProps, UserListState>{
         });
         //{配列}は展開される
         return(
-            <ul className={'UserList collection'} onClick={()=>{console.log("AAA");}}>
-                {userNodes}
-            </ul>
+            <div className={'UserList'}>
+                <ul className={'collection'} style={{margin: 0}}>
+                    <li className={'collection-item'}>
+                        <div style={{textAlign: 'center'}}>患者一覧</div>
+                    </li>
+                </ul>
+                <ul className={'collection'} style={{margin: 0, overflowY: 'scroll', height: 'calc(100vh - 108px)'}} onClick={()=>{console.log("AAA");}}>
+                    {userNodes}
+                </ul>
+            </div>
         );
     }
 }

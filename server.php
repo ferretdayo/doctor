@@ -10,6 +10,9 @@
  * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+include_once("./const.php");
+include_once("./sql.php");
+
 $scriptInvokedFromCli =
     isset($_SERVER['argv'][0]) && $_SERVER['argv'][0] === 'server.php';
 
@@ -37,6 +40,7 @@ function routeRequest()
             $commentsDecoded[] = [
                 'id'      => round(microtime(true) * 1000),
                 'author'  => $_POST['author'],
+                'img'    => $_POST['img'],
                 'text'    => $_POST['text']
             ];
 
@@ -47,6 +51,24 @@ function routeRequest()
         header('Cache-Control: no-cache');
         header('Access-Control-Allow-Origin: *');
         echo $comments;
+    }  elseif (preg_match('/\/api\/userlist(\?.*)?/', $uri)) {
+        $userlists = file_get_contents('userlist.json');
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userlistsDecoded = json_decode($userlists, true);
+            $userlistsDecoded[] = [
+                'id'      => round(microtime(true) * 1000),
+                'author'  => $_POST['author'],
+                'img'    => $_POST['img'],
+                'text'    => $_POST['text']
+            ];
+
+            $userlists = json_encode($userlistsDecoded, JSON_PRETTY_PRINT);
+            file_put_contents('userlist.json', $userlists);
+        }
+        header('Content-Type: application/json');
+        header('Cache-Control: no-cache');
+        header('Access-Control-Allow-Origin: *');
+        echo $userlists;
     } else {
         return false;
     }
