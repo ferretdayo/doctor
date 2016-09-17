@@ -7,6 +7,7 @@ import {CommentList} from "./CommentList"
 interface CommentBoxProps{
     url: string;
     pollInterval: number;
+    user: string;
 }
 
 export interface CommentBoxState{
@@ -22,20 +23,22 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
         this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     }
     //コメントをサーバから取得する関数
-    loadCommentsFromServer() {                                           
-        $.ajax({                                                                     
-            url: this.props.url,                                                       
-            dataType: 'json',                                                          
-            cache: false,                                                              
+    loadCommentsFromServer() {
+        console.log("commentbox: " + this.props.user);
+        $.ajax({
+            url: this.props.url+"?author="+this.props.user,
+            dataType: 'json',
+            type: 'GET',
+            cache: false,
             success: function(data: any) {
-                //現在のコメント情報をstateに記憶させる                                                  
+                //現在のコメント情報をstateに記憶させる
                 this.setState({data: data});
                 // this.onScroll(data[data.length-1].id);
-            }.bind(this),                                                              
-            error: function(xhr: any, status: any, err: any) {                                        
-                console.error(this.props.url, status, err.toString());                   
-            }.bind(this)                                                     
-        });                                                                              
+            }.bind(this),
+            error: function(xhr: any, status: any, err: any) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
     }
     // スクロールイベント
     onScroll(targetId: number) {
@@ -55,11 +58,11 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
         var newComments = comments.concat([comment]);
         //コメントリストの情報を更新                                
         this.setState({data: newComments});
-        $.ajax({                                                                     
+        $.ajax({
             url: this.props.url,                                                       
             dataType: 'json',                                                          
             type: 'POST',                                                              
-            data: comment,                                                             
+            data: comment,
             success: function(data: any) {
                 //現在のコメントリストの情報を更新                                              
                 this.setState({data: data});                                             
@@ -71,22 +74,42 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
             }.bind(this)
         });                                                                          
     }
+    componentWillReceiveProps(){
+        console.log("props")
+        this.loadCommentsFromServer();
+    }
     //1回のみ呼ばれる                                                  
-    componentDidMount() {                                      
-        this.loadCommentsFromServer();                                               
-        setInterval(this.loadCommentsFromServer, this.props.pollInterval);           
-    }                                                                            
-    render() {                                                           
-        return (                                                              
-        <div className="commentBox">   
-            <nav className="white">
-                <div className="nav-wrapper">
-                    <h1 className="center black-text" style={{margin:0, padding:0}}>ケニー</h1>
+    componentDidMount() {
+        this.loadCommentsFromServer();
+        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    }
+    render() {
+        //ユーザが選択されている場合
+        if(this.props.user !== ""){  
+            return (
+                <div className="commentBox">
+                    <nav className="white">
+                        <div className="nav-wrapper">
+                            <h1 className="center black-text" style={{margin:0, padding:0}}>{this.props.user}</h1>
+                        </div>
+                    </nav>
+                    <CommentList data={this.state.data} />
+                    <CommentForm onCommentSubmit={this.handleCommentSubmit} />
                 </div>
-            </nav>                          
-            <CommentList data={this.state.data} />                                   
-            <CommentForm onCommentSubmit={this.handleCommentSubmit} />               
-        </div>                                                                     
-        );                                                                           
+            );
+        } else {
+            return (
+                <div className="commentBox">
+                    <nav className="white">
+                        <div className="nav-wrapper">
+                            <h1 className="center black-text" style={{margin:0, padding:0}}>{this.props.user}</h1>
+                        </div>
+                    </nav>
+                    <div>
+                        誰も選んでないよ
+                    </div>
+                </div>
+            );
+        }
     }                                                                              
 }

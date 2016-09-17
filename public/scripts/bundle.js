@@ -80,9 +80,36 @@
 	    __extends(Chat, _super);
 	    function Chat(props) {
 	        _super.call(this, props);
+	        this.state = { data: [], user: "" };
+	        this.loadCommentsFromServer = this.loadCommentsFromServer.bind(this);
 	    }
+	    //チャットの相手の変更
+	    Chat.prototype.changeUser = function (username) {
+	        console.log(username);
+	        this.setState({ data: this.state.data, user: username });
+	    };
+	    //ユーザ情報の取得
+	    Chat.prototype.loadCommentsFromServer = function () {
+	        $.ajax({
+	            url: "/api/userlist",
+	            dataType: 'json',
+	            cache: false,
+	            success: function (data) {
+	                //現在のコメント情報をstateに記憶させる                                                  
+	                this.setState({ data: data, user: this.state.user });
+	            }.bind(this),
+	            error: function (xhr, status, err) {
+	                console.error("/api/userlist", status, err.toString());
+	            }.bind(this)
+	        });
+	    };
+	    //1回のみ呼ばれる
+	    Chat.prototype.componentDidMount = function () {
+	        this.loadCommentsFromServer();
+	        setInterval(this.loadCommentsFromServer, 2000);
+	    };
 	    Chat.prototype.render = function () {
-	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, null))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', pollInterval: 2000}))));
+	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, {data: this.state.data, changeUserHandler: this.changeUser.bind(this)}))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', user: this.state.user, pollInterval: 2000}))));
 	    };
 	    return Chat;
 	}(React.Component));
@@ -113,12 +140,14 @@
 	    }
 	    //コメントをサーバから取得する関数
 	    CommentBox.prototype.loadCommentsFromServer = function () {
+	        console.log("commentbox: " + this.props.user);
 	        $.ajax({
-	            url: this.props.url,
+	            url: this.props.url + "?author=" + this.props.user,
 	            dataType: 'json',
+	            type: 'GET',
 	            cache: false,
 	            success: function (data) {
-	                //現在のコメント情報をstateに記憶させる                                                  
+	                //現在のコメント情報をstateに記憶させる
 	                this.setState({ data: data });
 	                // this.onScroll(data[data.length-1].id);
 	            }.bind(this),
@@ -161,13 +190,23 @@
 	            }.bind(this)
 	        });
 	    };
+	    CommentBox.prototype.componentWillReceiveProps = function () {
+	        console.log("props");
+	        this.loadCommentsFromServer();
+	    };
 	    //1回のみ呼ばれる                                                  
 	    CommentBox.prototype.componentDidMount = function () {
 	        this.loadCommentsFromServer();
 	        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
 	    };
 	    CommentBox.prototype.render = function () {
-	        return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("h1", {className: "center black-text", style: { margin: 0, padding: 0 }}, "ケニー"))), React.createElement(CommentList_1.CommentList, {data: this.state.data}), React.createElement(CommentForm_1.CommentForm, {onCommentSubmit: this.handleCommentSubmit})));
+	        //ユーザが選択されている場合
+	        if (this.props.user !== "") {
+	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("h1", {className: "center black-text", style: { margin: 0, padding: 0 }}, this.props.user))), React.createElement(CommentList_1.CommentList, {data: this.state.data}), React.createElement(CommentForm_1.CommentForm, {onCommentSubmit: this.handleCommentSubmit})));
+	        }
+	        else {
+	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("h1", {className: "center black-text", style: { margin: 0, padding: 0 }}, this.props.user))), React.createElement("div", null, "誰も選んでないよ")));
+	        }
 	    };
 	    return CommentBox;
 	}(React.Component));
@@ -10676,36 +10715,39 @@
 	    __extends(UserList, _super);
 	    function UserList(props) {
 	        _super.call(this, props);
-	        this.state = { data: [] };
-	        this.loadCommentsFromServer = this.loadCommentsFromServer.bind(this);
+	        // this.state = {data: []};
 	    }
-	    //コメントをサーバから取得する関数
-	    UserList.prototype.loadCommentsFromServer = function () {
-	        $.ajax({
-	            url: "/api/userlist",
-	            dataType: 'json',
-	            cache: false,
-	            success: function (data) {
-	                //現在のコメント情報をstateに記憶させる                                                  
-	                this.setState({ data: data });
-	            }.bind(this),
-	            error: function (xhr, status, err) {
-	                console.error("/api/userlist", status, err.toString());
-	            }.bind(this)
-	        });
-	    };
-	    //1回のみ呼ばれる                                                  
-	    UserList.prototype.componentDidMount = function () {
-	        this.loadCommentsFromServer();
-	        setInterval(this.loadCommentsFromServer, 2000);
+	    // //コメントをサーバから取得する関数
+	    // loadCommentsFromServer() {                                           
+	    //     $.ajax({                                                                     
+	    //         url: "/api/userlist",
+	    //         dataType: 'json',
+	    //         cache: false,
+	    //         success: function(data: any) {
+	    //             //現在のコメント情報をstateに記憶させる                                                  
+	    //             this.setState({data: data});                                             
+	    //         }.bind(this),                                                              
+	    //         error: function(xhr: any, status: any, err: any) {                                        
+	    //             console.error("/api/userlist", status, err.toString());                   
+	    //         }.bind(this)                                                     
+	    //     });
+	    // }
+	    // //1回のみ呼ばれる                                                  
+	    // componentDidMount() {                                      
+	    //     this.loadCommentsFromServer();                                               
+	    //     setInterval(this.loadCommentsFromServer, 2000);           
+	    // }  
+	    UserList.prototype._handler = function (username) {
+	        this.props.changeUserHandler(username);
 	    };
 	    UserList.prototype.render = function () {
-	        var list = this.state.data.concat();
+	        var _this = this;
+	        var list = this.props.data.concat();
 	        var userNodes = list.map(function (user) {
-	            return (React.createElement(User_1.User, {UserInfo: user, key: user.id}));
+	            return (React.createElement(User_1.User, {UserInfo: user, key: user.id, changeUserHandler: _this._handler.bind(_this)}));
 	        });
 	        //{配列}は展開される
-	        return (React.createElement("div", {className: 'UserList'}, React.createElement("ul", {className: 'collection', style: { margin: 0 }}, React.createElement("li", {className: 'collection-item'}, React.createElement("div", {style: { textAlign: 'center' }}, "患者一覧"))), React.createElement("ul", {className: 'collection', style: { margin: 0, overflowY: 'scroll', height: 'calc(100vh - 108px)' }, onClick: function () { console.log("AAA"); }}, userNodes)));
+	        return (React.createElement("div", {className: 'UserList'}, React.createElement("ul", {className: 'collection', style: { margin: 0 }}, React.createElement("li", {className: 'collection-item'}, React.createElement("div", {style: { textAlign: 'center' }}, "患者一覧"))), React.createElement("ul", {className: 'collection', style: { margin: 0, overflowY: 'scroll', height: 'calc(100vh - 108px)' }}, userNodes)));
 	    };
 	    return UserList;
 	}(React.Component));
@@ -10728,8 +10770,11 @@
 	    function User(props) {
 	        _super.call(this, props);
 	    }
+	    User.prototype.handleUser = function () {
+	        this.props.changeUserHandler(this.props.UserInfo.author);
+	    };
 	    User.prototype.render = function () {
-	        return (React.createElement("li", {className: 'User collection-item avatar', style: { cursor: 'pointer' }}, React.createElement("img", {src: this.props.UserInfo.img, alt: "", className: "circle"}), React.createElement("span", null, this.props.UserInfo.author), React.createElement("p", {className: "hide-on-med-and-down"}, this.props.UserInfo.text)));
+	        return (React.createElement("li", {className: 'User collection-item avatar', style: { cursor: 'pointer' }, onClick: this.handleUser.bind(this)}, React.createElement("img", {src: this.props.UserInfo.img, alt: "", className: "circle"}), React.createElement("span", null, this.props.UserInfo.author), React.createElement("p", {className: "hide-on-med-and-down"}, this.props.UserInfo.text)));
 	    };
 	    return User;
 	}(React.Component));

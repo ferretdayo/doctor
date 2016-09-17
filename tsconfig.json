@@ -16,6 +16,7 @@
         "./src/ts/CommentForm.tsx",
         "./src/ts/CommentList.tsx",
         "./src/ts/UserList.tsx",
-        "./src/ts/User.tsx"
+        "./src/ts/User.tsx",
+        "./src/ts/Chat.tsx"
     ]
 }

@@ -58,7 +58,8 @@ app.get('/api/comments', function(req, res) {
 
     // });
     var file = "";
-    var user = req.body.author;
+    var user = req.query.author;
+    console.log(user);
     if (user === 'ケニー') {
         file = COMMENTS_FILE;
     } else {
@@ -79,6 +80,7 @@ app.post('/api/comments', function(req, res) {
             console.error(err);
             process.exit(1);
         }
+        console.log("post: " + req.body.author);
         var comments = JSON.parse(data);
         // NOTE: In a real implementation, we would likely rely on a database or
         // some other approach (e.g. UUIDs) to ensure a globally unique id. We'll
