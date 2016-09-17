@@ -1,4 +1,5 @@
-export var UserData = [
+"use strict";
+exports.UserData = [
     {
         "id": 1388534400000,
         "author": "Pete Hunt",
@@ -15,3 +16,4 @@ export var UserData = [
         "text": "dayo"
     }
 ];
+//# sourceMappingURL=data.js.map

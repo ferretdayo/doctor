@@ -1,5 +1,6 @@
 {
     "globalDependencies": {
+        "jquery": "registry:dt/jquery#1.10.0+20160908203239",
         "material-ui": "registry:dt/material-ui#0.15.1+20160908103128",
         "react": "registry:dt/react#0.14.0+20160829191040",
         "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",

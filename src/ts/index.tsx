@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import {CardUi} from "./CardUi";
+import {Chat} from "./Chat";
 
 ReactDOM.render(
-    <CardUi />,
+    <Chat />,
     document.getElementById('content')
 );
