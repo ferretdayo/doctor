@@ -103,7 +103,7 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
                         </div>
                     </nav>
                     <div>
-                        誰も選んでないよ
+                        
                     </div>
                 </div>
             );

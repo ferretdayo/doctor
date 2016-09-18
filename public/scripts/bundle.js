@@ -202,7 +202,7 @@
 	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("span", {className: "center black-text", style: { margin: 0, padding: 0, fontSize: '25px', display: 'block' }}, this.props.user))), React.createElement(CommentList_1.CommentList, {data: this.state.data}), React.createElement(CommentForm_1.CommentForm, {onCommentSubmit: this.handleCommentSubmit})));
 	        }
 	        else {
-	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("h1", {className: "center black-text", style: { margin: 0, padding: 0 }}, this.props.user))), React.createElement("div", null, "誰も選んでないよ")));
+	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("h1", {className: "center black-text", style: { margin: 0, padding: 0 }}, this.props.user))), React.createElement("div", null)));
 	        }
 	    };
 	    return CommentBox;

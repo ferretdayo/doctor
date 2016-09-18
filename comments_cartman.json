@@ -1,38 +1,21 @@
-[
-    {
-        "id": 1388534400000,
-        "author": "CartMan",
-        "img": "./img/2.jpg",
-        "text": "Hey guy!"
-    },
-    {
-        "id": 1420070400000,
-        "author": "You",
-        "img": "",
-        "text": "yeah Cartman"
-    },
-    {
-        "id": 1473380343351,
-        "author": "CartMan",
-        "img": "./img/2.jpg",
-        "text": "dayo"
-    },
-    {
-        "id": 1474164080434,
-        "author": "You",
-        "text": "What's up",
-        "img": ""
-    },
-    {
-        "id": 1474164179929,
-        "author": "You",
-        "text": "?",
-        "img": ""
-    },
-    {
-        "id": 1474166231648,
-        "author": "You",
-        "text": "おおおお",
-        "img": ""
-    }
-]
+[{
+    "id": 1388534400000,
+    "author": "CartMan",
+    "img": "./img/2.jpg",
+    "text": "Hey guy!"
+}, {
+    "id": 1420070400000,
+    "author": "You",
+    "img": "",
+    "text": "yeah Cartman"
+}, {
+    "id": 1473380343351,
+    "author": "CartMan",
+    "img": "./img/2.jpg",
+    "text": "dayo"
+}, {
+    "id": 1474164080434,
+    "author": "You",
+    "text": "What's up",
+    "img": ""
+}]

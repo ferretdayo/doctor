@@ -1,38 +1,16 @@
-[
-    {
-        "id": 1388534400000,
-        "author": "Kenny",
-        "img": "./img/1.jpg",
-        "text": "Hey there!"
-    },
-    {
-        "id": 1420070400000,
-        "author": "You",
-        "img": "",
-        "text": "React is *great*!"
-    },
-    {
-        "id": 1473380343351,
-        "author": "Kenny",
-        "img": "./img/1.jpg",
-        "text": "dayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayo"
-    },
-    {
-        "id": 1474165750718,
-        "author": "You",
-        "text": "あああｋ",
-        "img": ""
-    },
-    {
-        "id": 1474165750738,
-        "author": "You",
-        "text": "ｋあｋいｋうえ",
-        "img": ""
-    },
-    {
-        "id": 1474166240777,
-        "author": "You",
-        "text": ")^o^(",
-        "img": ""
-    }
-]
+[{
+    "id": 1388534400000,
+    "author": "Kenny",
+    "img": "./img/1.jpg",
+    "text": "Hey there!"
+}, {
+    "id": 1420070400000,
+    "author": "You",
+    "img": "",
+    "text": "React is *great*!"
+}, {
+    "id": 1473380343351,
+    "author": "Kenny",
+    "img": "./img/1.jpg",
+    "text": "dayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayodayo"
+}]
