@@ -1,16 +1,32 @@
-[{
-    "id": 1388534400000,
-    "author": "Timy",
-    "img": ".\/img\/8.jpg",
-    "text": "Hey guy!"
-}, {
-    "id": 1420070400000,
-    "author": "You",
-    "img": "",
-    "text": "yeah Timy"
-}, {
-    "id": 1473380343351,
-    "author": "Timy",
-    "img": ".\/img\/8.jpg",
-    "text": "dayo"
-}]
+[
+    {
+        "id": 1388534400000,
+        "author": "Timy",
+        "img": "./img/8.jpg",
+        "text": "Hey guy!"
+    },
+    {
+        "id": 1420070400000,
+        "author": "You",
+        "img": "",
+        "text": "yeah Timy"
+    },
+    {
+        "id": 1473380343351,
+        "author": "Timy",
+        "img": "./img/8.jpg",
+        "text": "dayo"
+    },
+    {
+        "id": 1474188200473,
+        "author": "You",
+        "text": ")^o^(",
+        "img": ""
+    },
+    {
+        "id": 1474188717532,
+        "author": "You",
+        "text": "<script>alert('aaaa');</script>",
+        "img": ""
+    }
+]

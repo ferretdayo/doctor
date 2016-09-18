@@ -9,6 +9,7 @@
  * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+var electron = require('electron');
 
 var fs = require('fs');
 var path = require('path');
@@ -31,6 +32,9 @@ var mysql = require('mysql');
 //     console.log('connected as id ' + connection.threadId);
 // });
 
+var eleapp = electron.app;
+var BrowserWindow = electron.BrowserWindow;
+mainWindow = null;
 
 var COMMENTS_FILE1 = path.join(__dirname, 'comments_kenny.json');
 var COMMENTS_FILE2 = path.join(__dirname, 'comments_cartman.json');
@@ -39,7 +43,25 @@ var COMMENTS_FILE4 = path.join(__dirname, 'comments_stan.json');
 var COMMENTS_FILE5 = path.join(__dirname, 'comments_timy.json');
 var USERS_FILE = path.join(__dirname, 'userlist.json');
 
-app.set('port', (process.env.PORT || 8000));
+eleapp.on('window-all-closed', function() {
+    if (process.platform != 'darwin')
+        eleapp.quit();
+});
+
+// Electronの初期化完了後に実行
+eleapp.on('ready', function() {
+    // メイン画面の表示。ウィンドウの幅、高さを指定できる
+    mainWindow = new BrowserWindow({ width: 800, height: 600, 'node-integration': false });
+    //mainWindow.loadURL('file://' + __dirname + '/views/index.html');
+    mainWindow.loadURL('http://127.0.0.1:3000');
+    // ウィンドウが閉じられたらアプリも終了
+    mainWindow.on('closed', function() {
+        mainWindow = null;
+    });
+    //mainWindow.webContents.openDevTools();
+});
+
+app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
