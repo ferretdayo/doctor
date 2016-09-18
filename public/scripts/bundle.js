@@ -95,7 +95,7 @@
 	            dataType: 'json',
 	            cache: false,
 	            success: function (data) {
-	                //現在のコメント情報をstateに記憶させる                                                  
+	                //現在のコメント情報をstateに記憶させる
 	                this.setState({ data: data, user: this.state.user });
 	            }.bind(this),
 	            error: function (xhr, status, err) {
@@ -109,7 +109,7 @@
 	        setInterval(this.loadCommentsFromServer, 2000);
 	    };
 	    Chat.prototype.render = function () {
-	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, {data: this.state.data, changeUserHandler: this.changeUser.bind(this)}))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', user: this.state.user, pollInterval: 350}))));
+	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, {data: this.state.data, changeUserHandler: this.changeUser.bind(this)}))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', user: this.state.user, pollInterval: 300}))));
 	    };
 	    return Chat;
 	}(React.Component));
@@ -199,7 +199,7 @@
 	    CommentBox.prototype.render = function () {
 	        //ユーザが選択されている場合
 	        if (this.props.user !== "") {
-	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("h1", {className: "center black-text", style: { margin: 0, padding: 0 }}, this.props.user))), React.createElement(CommentList_1.CommentList, {data: this.state.data}), React.createElement(CommentForm_1.CommentForm, {onCommentSubmit: this.handleCommentSubmit})));
+	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("span", {className: "center black-text", style: { margin: 0, padding: 0, fontSize: '25px', display: 'block' }}, this.props.user))), React.createElement(CommentList_1.CommentList, {data: this.state.data}), React.createElement(CommentForm_1.CommentForm, {onCommentSubmit: this.handleCommentSubmit})));
 	        }
 	        else {
 	            return (React.createElement("div", {className: "commentBox"}, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("h1", {className: "center black-text", style: { margin: 0, padding: 0 }}, this.props.user))), React.createElement("div", null, "誰も選んでないよ")));

@@ -62,7 +62,7 @@ export class CommentForm extends React.Component<CommentFormProps, CommentFormSt
                     />
                     <div style={{width: '65%', display: 'block', float: 'left'}}>
                         <input
-                            type="text"                                             
+                            type="text"
                             placeholder="メッセージを入力..."
                             value={this.state.text} 
                             onChange={this.handleTextChange} 

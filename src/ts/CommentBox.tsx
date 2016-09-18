@@ -60,9 +60,9 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
         //コメントリストの情報を更新                                
         this.setState({data: newComments});
         $.ajax({
-            url: this.props.url,                                                       
-            dataType: 'json',                                                          
-            type: 'POST',                                                              
+            url: this.props.url,
+            dataType: 'json',
+            type: 'POST',
             data: {comment: comment, target: this.props.user},
             success: function(data: any) {
                 //現在のコメントリストの情報を更新                                              
@@ -87,7 +87,7 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
                 <div className="commentBox">
                     <nav className="white">
                         <div className="nav-wrapper">
-                            <h1 className="center black-text" style={{margin:0, padding:0}}>{this.props.user}</h1>
+                            <span className="center black-text" style={{margin:0, padding:0, fontSize: '25px', display: 'block'}}>{this.props.user}</span>
                         </div>
                     </nav>
                     <CommentList data={this.state.data} />
