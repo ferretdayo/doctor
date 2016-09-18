@@ -1,7 +1,7 @@
 {
     "name": "doctor-chat",
     "version": "0.0.0",
-    "private": false,
+    "private": true,
     "license": "see LICENSE file",
     "description": "Code from the React tutorial.",
     "main": "server.js",
