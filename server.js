@@ -32,8 +32,11 @@ var mysql = require('mysql');
 // });
 
 
-var COMMENTS_FILE = path.join(__dirname, 'comments.json');
-var COMMENTS_CARTMAN_FILE = path.join(__dirname, 'comments_cartman.json');
+var COMMENTS_FILE1 = path.join(__dirname, 'comments_kenny.json');
+var COMMENTS_FILE2 = path.join(__dirname, 'comments_cartman.json');
+var COMMENTS_FILE3 = path.join(__dirname, 'comments_kairu.json');
+var COMMENTS_FILE4 = path.join(__dirname, 'comments_stan.json');
+var COMMENTS_FILE5 = path.join(__dirname, 'comments_timy.json');
 var USERS_FILE = path.join(__dirname, 'userlist.json');
 
 app.set('port', (process.env.PORT || 3000));
@@ -59,40 +62,77 @@ app.get('/api/comments', function(req, res) {
     // });
     var file = "";
     var user = req.query.author;
-    console.log(user);
-    if (user === 'ケニー') {
-        file = COMMENTS_FILE;
-    } else {
-        file = COMMENTS_CARTMAN_FILE;
+    console.log("get: " + user);
+    switch (user) {
+        case 'ケニー':
+            file = COMMENTS_FILE1;
+            break;
+        case 'カートマン':
+            file = COMMENTS_FILE2;
+            break;
+        case 'カイル':
+            file = COMMENTS_FILE3;
+            break;
+        case 'スタン':
+            file = COMMENTS_FILE4;
+            break;
+        case 'ティミー':
+            file = COMMENTS_FILE5;
+            break;
+    }
+    if (file !== "") {
+        fs.readFile(file, function(err, data) {
+            if (err) {
+                console.error(err);
+                process.exit(1);
+            }
+            res.json(JSON.parse(data));
+        });
+    }
+});
+
+app.post('/api/comments', function(req, res) {
+    var file = "";
+    var user = req.body.target;
+    console.log("post: " + user);
+    switch (user) {
+        case 'ケニー':
+            file = COMMENTS_FILE1;
+            break;
+        case 'カートマン':
+            file = COMMENTS_FILE2;
+            break;
+        case 'カイル':
+            file = COMMENTS_FILE3;
+            break;
+        case 'スタン':
+            file = COMMENTS_FILE4;
+            break;
+        case 'ティミー':
+            file = COMMENTS_FILE5;
+            break;
+    }
+    if (file === "") {
+        return;
     }
     fs.readFile(file, function(err, data) {
         if (err) {
             console.error(err);
             process.exit(1);
         }
-        res.json(JSON.parse(data));
-    });
-});
-
-app.post('/api/comments', function(req, res) {
-    fs.readFile(COMMENTS_FILE, function(err, data) {
-        if (err) {
-            console.error(err);
-            process.exit(1);
-        }
-        console.log("post: " + req.body.author);
+        console.log("post: " + req.body.comment.author);
         var comments = JSON.parse(data);
         // NOTE: In a real implementation, we would likely rely on a database or
         // some other approach (e.g. UUIDs) to ensure a globally unique id. We'll
         // treat Date.now() as unique-enough for our purposes.
         var newComment = {
             id: Date.now(),
-            author: req.body.author,
-            text: req.body.text,
-            img: req.body.img,
+            author: req.body.comment.author,
+            text: req.body.comment.text,
+            img: req.body.comment.img,
         };
         comments.push(newComment);
-        fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
+        fs.writeFile(file, JSON.stringify(comments, null, 4), function(err) {
             if (err) {
                 console.error(err);
                 process.exit(1);

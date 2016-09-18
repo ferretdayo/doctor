@@ -27,6 +27,7 @@ export class CommentForm extends React.Component<CommentFormProps, CommentFormSt
     }
     //Textが変更された際に実行される関数
     handleTextChange(e: any){
+        console.log(e.type);
         this.setState({text: e.target.value});
     }
     //onSubmitで呼び出される関数
@@ -52,7 +53,7 @@ export class CommentForm extends React.Component<CommentFormProps, CommentFormSt
             <div className="row">
                 <form className="commentForm" onSubmit={this.submit.bind(this)} style={{backgroundColor: 'white',bottom: 0, width: '100%', position: 'fixed'}}>
                     <input
-                        type="text"                                             
+                        type="text"
                         placeholder="Your name"
                         value={this.state.author}
                         onChange={this.handleAuthorChange}
@@ -60,7 +61,7 @@ export class CommentForm extends React.Component<CommentFormProps, CommentFormSt
                         hidden
                     />
                     <div style={{width: '65%', display: 'block', float: 'left'}}>
-                        <input                                                    
+                        <input
                             type="text"                                             
                             placeholder="メッセージを入力..."
                             value={this.state.text} 

@@ -26,10 +26,11 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
     loadCommentsFromServer() {
         console.log("commentbox: " + this.props.user);
         $.ajax({
-            url: this.props.url+"?author="+this.props.user,
+            url: this.props.url,
             dataType: 'json',
             type: 'GET',
             cache: false,
+            data: {author: this.props.user},
             success: function(data: any) {
                 //現在のコメント情報をstateに記憶させる
                 this.setState({data: data});
@@ -62,7 +63,7 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
             url: this.props.url,                                                       
             dataType: 'json',                                                          
             type: 'POST',                                                              
-            data: comment,
+            data: {comment: comment, target: this.props.user},
             success: function(data: any) {
                 //現在のコメントリストの情報を更新                                              
                 this.setState({data: data});                                             
@@ -73,10 +74,6 @@ export class CommentBox extends React.Component<CommentBoxProps, CommentBoxState
                 console.error(this.props.url, status, err.toString());                   
             }.bind(this)
         });                                                                          
-    }
-    componentWillReceiveProps(){
-        console.log("props")
-        this.loadCommentsFromServer();
     }
     //1回のみ呼ばれる                                                  
     componentDidMount() {

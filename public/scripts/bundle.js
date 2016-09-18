@@ -109,7 +109,7 @@
 	        setInterval(this.loadCommentsFromServer, 2000);
 	    };
 	    Chat.prototype.render = function () {
-	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, {data: this.state.data, changeUserHandler: this.changeUser.bind(this)}))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', user: this.state.user, pollInterval: 2000}))));
+	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, {data: this.state.data, changeUserHandler: this.changeUser.bind(this)}))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', user: this.state.user, pollInterval: 300}))));
 	    };
 	    return Chat;
 	}(React.Component));
@@ -142,10 +142,11 @@
 	    CommentBox.prototype.loadCommentsFromServer = function () {
 	        console.log("commentbox: " + this.props.user);
 	        $.ajax({
-	            url: this.props.url + "?author=" + this.props.user,
+	            url: this.props.url,
 	            dataType: 'json',
 	            type: 'GET',
 	            cache: false,
+	            data: { author: this.props.user },
 	            success: function (data) {
 	                //現在のコメント情報をstateに記憶させる
 	                this.setState({ data: data });
@@ -178,7 +179,7 @@
 	            url: this.props.url,
 	            dataType: 'json',
 	            type: 'POST',
-	            data: comment,
+	            data: { comment: comment, target: this.props.user },
 	            success: function (data) {
 	                //現在のコメントリストの情報を更新                                              
 	                this.setState({ data: data });
@@ -189,10 +190,6 @@
 	                console.error(this.props.url, status, err.toString());
 	            }.bind(this)
 	        });
-	    };
-	    CommentBox.prototype.componentWillReceiveProps = function () {
-	        console.log("props");
-	        this.loadCommentsFromServer();
 	    };
 	    //1回のみ呼ばれる                                                  
 	    CommentBox.prototype.componentDidMount = function () {
@@ -241,6 +238,7 @@
 	    };
 	    //Textが変更された際に実行される関数
 	    CommentForm.prototype.handleTextChange = function (e) {
+	        console.log(e.type);
 	        this.setState({ text: e.target.value });
 	    };
 	    //onSubmitで呼び出される関数
@@ -330,10 +328,10 @@
 	    Comment.prototype.render = function () {
 	        //相手のコメントの場合
 	        if (this.props.img !== "") {
-	            return (React.createElement("div", {className: "row", style: { display: 'flex', alignItems: 'flex-end', marginBottom: '47px' }}, React.createElement("img", {src: this.props.img, width: '28px', height: '28px', style: { borderRadius: '14px' }}), React.createElement("div", {className: 'Comment', style: { color: this.props.fontColor, borderRadius: '20px', borderWidth: '1px', borderStyle: 'solid', borderColor: '#e4e8eb', backgroundColor: this.props.color, width: '45%', paddingLeft: '12px', marginLeft: '8px' }}, React.createElement("span", {dangerouslySetInnerHTML: this.rawMarkup()}))));
+	            return (React.createElement("div", {className: "row", style: { display: 'flex', alignItems: 'flex-end', marginBottom: '47px' }}, React.createElement("img", {src: this.props.img, width: '28px', height: '28px', style: { borderRadius: '14px' }}), React.createElement("div", {className: 'Comment', style: { color: this.props.fontColor, borderRadius: '20px', borderWidth: '1px', borderStyle: 'solid', borderColor: '#e4e8eb', backgroundColor: this.props.color, width: '45%', paddingLeft: '12px', paddingRight: '12px', marginLeft: '8px' }}, React.createElement("span", {dangerouslySetInnerHTML: this.rawMarkup(), style: { width: '100%', wordBreak: 'break-all' }}))));
 	        }
 	        //自分のコメントの場合
-	        return (React.createElement("div", {className: "row", style: { marginBottom: '47px' }}, React.createElement("div", {className: 'Comment', style: { float: 'right', color: this.props.fontColor, borderRadius: '20px', borderWidth: '1px', borderStyle: 'solid', borderColor: this.props.color, backgroundColor: this.props.color, width: '45%', paddingLeft: '12px' }}, React.createElement("span", {dangerouslySetInnerHTML: this.rawMarkup()}))));
+	        return (React.createElement("div", {className: "row", style: { marginBottom: '47px' }}, React.createElement("div", {className: 'Comment', style: { float: 'right', color: this.props.fontColor, borderRadius: '20px', borderWidth: '1px', borderStyle: 'solid', borderColor: this.props.color, backgroundColor: this.props.color, width: '45%', paddingLeft: '12px', paddingRight: '12px' }}, React.createElement("span", {dangerouslySetInnerHTML: this.rawMarkup(), style: { width: '100%', wordBreak: 'break-all' }}))));
 	    };
 	    return Comment;
 	}(React.Component));

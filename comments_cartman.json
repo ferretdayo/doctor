@@ -1,61 +1,32 @@
-[{
-    "id": 1388534400000,
-    "author": "CartMan",
-    "img": ".\/img\/2.jpg",
-    "text": "Hey guy!"
-}, {
-    "id": 1420070400000,
-    "author": "You",
-    "img": "",
-    "text": "yeah Cartman"
-}, {
-    "id": 1473380343351,
-    "author": "CartMan",
-    "img": ".\/img\/2.jpg",
-    "text": "dayo"
-}, {
-    "id": 1474078108902,
-    "author": "You",
-    "img": "",
-    "text": "sss"
-}, {
-    "id": 1474097541750,
-    "author": "You",
-    "img": "",
-    "text": "\u304a\u304a\u304a"
-}, {
-    "id": 1474097546431,
-    "author": "You",
-    "img": "",
-    "text": "\u304a\u304a\u304a\u304a\u304a\u304a\u304a\u304a\u304a\u304a"
-}, {
-    "id": 1474097762942,
-    "author": "You",
-    "text": "\u304a\u304a\u304a",
-    "img": ""
-}, {
-    "id": 1474104090605,
-    "author": "You",
-    "text": "\u3042\u3044\u3046\u3048\u304a\uff4b\u3042\uff4b\u3044\uff4b\u3046\uff4b\u3048\uff4b\u304a",
-    "img": ""
-}, {
-    "id": 1474104098494,
-    "author": "You",
-    "text": "\u304a\u304a\u304a\u304a",
-    "img": ""
-}, {
-    "id": 1474105189743,
-    "author": "You",
-    "img": "",
-    "text": ")^o^("
-}, {
-    "id": 1474105249860,
-    "author": "You",
-    "img": "",
-    "text": "H\u3044"
-}, {
-    "id": 1474106530668,
-    "author": "You",
-    "img": "",
-    "text": "ooo"
-}]
+[
+    {
+        "id": 1388534400000,
+        "author": "CartMan",
+        "img": "./img/2.jpg",
+        "text": "Hey guy!"
+    },
+    {
+        "id": 1420070400000,
+        "author": "You",
+        "img": "",
+        "text": "yeah Cartman"
+    },
+    {
+        "id": 1473380343351,
+        "author": "CartMan",
+        "img": "./img/2.jpg",
+        "text": "dayo"
+    },
+    {
+        "id": 1474164080434,
+        "author": "You",
+        "text": "What's up",
+        "img": ""
+    },
+    {
+        "id": 1474164179929,
+        "author": "You",
+        "text": "?",
+        "img": ""
+    }
+]
