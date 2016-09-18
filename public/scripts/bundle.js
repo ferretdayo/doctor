@@ -109,7 +109,7 @@
 	        setInterval(this.loadCommentsFromServer, 2000);
 	    };
 	    Chat.prototype.render = function () {
-	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, {data: this.state.data, changeUserHandler: this.changeUser.bind(this)}))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', user: this.state.user, pollInterval: 300}))));
+	        return (React.createElement("div", {className: "Chat row"}, React.createElement("div", {className: 'col s3 m3 l3', style: { height: '100vh', top: 0, left: 0, margin: 0, padding: 0 }}, React.createElement("div", null, React.createElement("nav", {className: "white"}, React.createElement("div", {className: "nav-wrapper"}, React.createElement("div", {className: "brand-logo center black-text"}, "MediChat")))), React.createElement("div", null, React.createElement(UserList_1.UserList, {data: this.state.data, changeUserHandler: this.changeUser.bind(this)}))), React.createElement("div", {className: 'col s9 m9 l9', style: { height: '100vh', margin: 0, padding: 0 }}, React.createElement(CommentBox_1.CommentBox, {url: '/api/comments', user: this.state.user, pollInterval: 350}))));
 	    };
 	    return Chat;
 	}(React.Component));

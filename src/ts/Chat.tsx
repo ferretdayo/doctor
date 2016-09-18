@@ -62,7 +62,7 @@ export class Chat extends React.Component<ChatProps, ChatState> {
                     </div>
                 </div>
                 <div className={'col s9 m9 l9'} style={{height: '100vh', margin: 0, padding: 0}}>
-                    <CommentBox url='/api/comments' user={this.state.user} pollInterval={300} />
+                    <CommentBox url='/api/comments' user={this.state.user} pollInterval={350} />
                 </div>
            </div>
         );
