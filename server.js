@@ -39,7 +39,7 @@ var COMMENTS_FILE4 = path.join(__dirname, 'comments_stan.json');
 var COMMENTS_FILE5 = path.join(__dirname, 'comments_timy.json');
 var USERS_FILE = path.join(__dirname, 'userlist.json');
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 8000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
